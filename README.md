@@ -1,73 +1,69 @@
-# Welcome to your Lovable project
+# CMDHub - Master Every Command
 
-## Project info
+The ultimate command-line reference hub for developers. Discover, learn, and master commands for Git, Docker, Linux, AWS CLI, Kubernetes, and more.
 
-**URL**: https://lovable.dev/projects/0d283e3d-a7a2-4979-92ae-41b57f3a9354
+## 🚀 Features
 
-## How can I edit this code?
+- **2000+ Commands** across 50+ categories
+- **Interactive Examples** with copy-to-clipboard functionality
+- **Trending Commands** to stay updated with popular tools
+- **Beautiful UI** with dark theme and smooth animations
+- **Responsive Design** for desktop and mobile
+- **Search & Filter** to find commands quickly
 
-There are several ways of editing your application.
+## 🛠️ Tech Stack
 
-**Use Lovable**
+This project is built with modern technologies:
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/0d283e3d-a7a2-4979-92ae-41b57f3a9354) and start prompting.
+- **React 18** - UI library
+- **TypeScript** - Type safety
+- **Vite** - Build tool & dev server
+- **Tailwind CSS** - Utility-first styling
+- **shadcn/ui** - Component library
+- **Framer Motion** - Smooth animations
+- **React Router** - Client-side routing
 
-Changes made via Lovable will be committed automatically to this repo.
+## 🏃‍♂️ Getting Started
 
-**Use your preferred IDE**
+### Prerequisites
+- Node.js (v18 or higher)
+- npm or yarn
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+### Installation
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+1. Clone the repository:
+```bash
+git clone https://github.com/devanshuK45/Cmdhub.git
+cd Cmdhub
+```
 
-Follow these steps:
+2. Install dependencies:
+```bash
+npm install
+```
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+3. Start the development server:
+```bash
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+4. Open your browser and visit `http://localhost:8080`
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## 📝 Available Scripts
 
-**Use GitHub Codespaces**
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run preview` - Preview production build
+- `npm run lint` - Run ESLint
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## 🤝 Contributing
 
-## What technologies are used for this project?
+Contributions are welcome! Please feel free to submit a Pull Request.
 
-This project is built with:
+## 📄 License
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+This project is open source and available under the MIT License.
 
-## How can I deploy this project?
+## 👨‍💻 Author
 
-Simply open [Lovable](https://lovable.dev/projects/0d283e3d-a7a2-4979-92ae-41b57f3a9354) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+Created by [devanshuK45](https://github.com/devanshuK45)

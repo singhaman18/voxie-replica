@@ -49,7 +49,7 @@ const CategoryCard = ({ category, index = 0 }: CategoryCardProps) => {
         <Card className="card-hover group cursor-pointer h-full">
           <CardHeader className="pb-2">
             <div className="flex items-center justify-between">
-              <div className={`p-3 rounded-lg bg-gradient-primary group-hover:animate-glow-pulse transition-all duration-300`}>
+              <div className={`p-3 rounded-lg bg-gradient-primary transition-all duration-300`}>
                 <IconComponent className={`h-6 w-6 ${category.color}`} />
               </div>
               <Badge variant="outline" className="text-xs">
