@@ -72,7 +72,8 @@ const Profile = () => {
 
   return (
     <Layout>
-      <div className="container mx-auto px-4 py-8 space-y-8">
+      <div className="min-h-screen bg-gradient-cyan-dark">
+        <div className="container mx-auto px-4 py-8 space-y-8">
         {/* Profile Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -98,7 +99,7 @@ const Profile = () => {
                     </Badge>
                   </div>
                   
-                  <div className="flex flex-col md:flex-row md:items-center space-y-1 md:space-y-0 md:space-x-4 text-sm text-muted-foreground">
+                  <div className="flex flex-col md:flex-row md:items-center space-y-1 md:space-y-0 md:space-x-4 text-sm text-white/70">
                     <div className="flex items-center space-x-1">
                       <Mail className="h-4 w-4" />
                       <span>{mockUser.email}</span>
@@ -153,7 +154,7 @@ const Profile = () => {
                   </div>
                   <div className="space-y-1">
                     <div className="font-medium">{stat.label}</div>
-                    <div className="text-sm text-muted-foreground">{stat.description}</div>
+                    <div className="text-sm text-white/70">{stat.description}</div>
                   </div>
                 </CardContent>
               </Card>
@@ -189,7 +190,7 @@ const Profile = () => {
               <CardContent className="p-8 text-center">
                 <Eye className="h-12 w-12 mx-auto mb-3 text-muted-foreground/50" />
                 <h3 className="font-semibold mb-2">No recent activity</h3>
-                <p className="text-muted-foreground mb-4">
+                <p className="text-white/70 mb-4">
                   Start exploring commands to see your recent activity here
                 </p>
                 <Button asChild className="btn-hero">
@@ -224,26 +225,27 @@ const Profile = () => {
                     <TrendingUp className="h-8 w-8 text-primary" />
                   </div>
                   <div className="font-semibold">Command Explorer</div>
-                  <div className="text-sm text-muted-foreground">500/1000 commands used</div>
+                  <div className="text-sm text-white/70">500/1000 commands used</div>
                 </div>
                 <div className="text-center">
                   <div className="w-16 h-16 mx-auto rounded-full bg-accent/20 flex items-center justify-center mb-2">
                     <Heart className="h-8 w-8 text-accent" />
                   </div>
                   <div className="font-semibold">Collector</div>
-                  <div className="text-sm text-muted-foreground">4/10 favorites added</div>
+                  <div className="text-sm text-white/70">4/10 favorites added</div>
                 </div>
                 <div className="text-center">
                   <div className="w-16 h-16 mx-auto rounded-full bg-success/20 flex items-center justify-center mb-2">
                     <Share2 className="h-8 w-8 text-success" />
                   </div>
                   <div className="font-semibold">Collaborator</div>
-                  <div className="text-sm text-muted-foreground">23/50 commands shared</div>
+                  <div className="text-sm text-white/70">23/50 commands shared</div>
                 </div>
               </div>
             </CardContent>
           </Card>
         </motion.div>
+        </div>
       </div>
     </Layout>
   );

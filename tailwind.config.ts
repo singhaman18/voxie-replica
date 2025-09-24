@@ -66,6 +66,11 @@ export default {
         "gradient-accent": "var(--gradient-accent)",
         "gradient-card": "var(--gradient-card)",
         "gradient-hero": "var(--gradient-hero)",
+        "gradient-cyan-green": "linear-gradient(90deg, #07AEEA 0%, #2BF598 100%)",
+        "gradient-cyan-blue": "linear-gradient(90deg, #07AEEA 0%, #0ED2F7 100%)",
+        "gradient-green-cyan": "linear-gradient(90deg, #2BF598 0%, #00C9FF 100%)",
+        "gradient-blue-purple": "linear-gradient(90deg, #00C9FF 0%, #8E2DE2 100%)",
+        "gradient-cyan-dark": "linear-gradient(90deg, #0ED2F7 0%, #24243E 100%)",
       },
       boxShadow: {
         "card": "var(--shadow-card)",

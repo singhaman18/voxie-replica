@@ -15,7 +15,8 @@ const Dashboard = () => {
 
   return (
     <Layout>
-      <div className="container mx-auto px-4 py-8 space-y-12">
+      <div className="min-h-screen bg-gradient-cyan-blue">
+        <div className="container mx-auto px-4 py-8 space-y-12">
         {/* Welcome Section */}
         <motion.section
           initial={{ opacity: 0, y: 20 }}
@@ -27,7 +28,7 @@ const Dashboard = () => {
             <h1 className="text-3xl md:text-4xl font-bold">
               Welcome to <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">CMDHub</span>
             </h1>
-            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+            <p className="text-white/80 text-lg max-w-2xl mx-auto">
               Discover and master command-line tools with our comprehensive collection
             </p>
           </div>
@@ -115,6 +116,7 @@ const Dashboard = () => {
             ))}
           </div>
         </motion.section>
+        </div>
       </div>
     </Layout>
   );

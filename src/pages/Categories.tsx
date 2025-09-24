@@ -14,7 +14,8 @@ const Categories = () => {
 
   return (
     <Layout>
-      <div className="container mx-auto px-4 py-8 space-y-8">
+      <div className="min-h-screen bg-gradient-cyan-green">
+        <div className="container mx-auto px-4 py-8 space-y-8">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -26,7 +27,7 @@ const Categories = () => {
             <Grid3X3 className="h-8 w-8 text-primary" />
             <h1 className="text-3xl md:text-4xl font-bold">Command Categories</h1>
           </div>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+          <p className="text-white/80 text-lg max-w-2xl mx-auto">
             Explore commands organized by tools and platforms
           </p>
           
@@ -65,22 +66,23 @@ const Categories = () => {
               <div className="text-3xl font-bold text-primary">
                 {categories.length}
               </div>
-              <div className="text-muted-foreground">Categories</div>
+              <div className="text-white/70">Categories</div>
             </div>
             <div className="space-y-2">
               <div className="text-3xl font-bold text-accent">
                 {categories.reduce((sum, cat) => sum + cat.commandCount, 0)}
               </div>
-              <div className="text-muted-foreground">Total Commands</div>
+              <div className="text-white/70">Total Commands</div>
             </div>
             <div className="space-y-2">
               <div className="text-3xl font-bold text-success">
                 Daily
               </div>
-              <div className="text-muted-foreground">Updates</div>
+              <div className="text-white/70">Updates</div>
             </div>
           </div>
         </motion.div>
+        </div>
       </div>
     </Layout>
   );

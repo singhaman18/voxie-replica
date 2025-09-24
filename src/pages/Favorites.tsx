@@ -36,7 +36,8 @@ const Favorites = () => {
 
   return (
     <Layout>
-      <div className="container mx-auto px-4 py-8 space-y-8">
+      <div className="min-h-screen bg-gradient-blue-purple">
+        <div className="container mx-auto px-4 py-8 space-y-8">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -48,7 +49,7 @@ const Favorites = () => {
             <Heart className="h-8 w-8 text-red-500" />
             <h1 className="text-3xl md:text-4xl font-bold">Your Favorites</h1>
           </div>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+          <p className="text-white/80 text-lg max-w-2xl mx-auto">
             Quick access to your most-used and bookmarked commands
           </p>
           
@@ -141,6 +142,7 @@ const Favorites = () => {
             </div>
           </motion.div>
         )}
+        </div>
       </div>
     </Layout>
   );

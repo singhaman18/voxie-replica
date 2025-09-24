@@ -43,7 +43,8 @@ const Trending = () => {
 
   return (
     <Layout>
-      <div className="container mx-auto px-4 py-8 space-y-8">
+      <div className="min-h-screen bg-gradient-green-cyan">
+        <div className="container mx-auto px-4 py-8 space-y-8">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -55,7 +56,7 @@ const Trending = () => {
             <TrendingUp className="h-8 w-8 text-primary" />
             <h1 className="text-3xl md:text-4xl font-bold">Trending Commands</h1>
           </div>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+          <p className="text-white/80 text-lg max-w-2xl mx-auto">
             Most popular commands used by developers worldwide this week
           </p>
           
@@ -87,7 +88,7 @@ const Trending = () => {
               <div className="text-2xl font-bold text-accent">
                 {trendingCommands.filter(cmd => cmd.trend === "up").length}
               </div>
-              <div className="text-sm text-muted-foreground">Rising</div>
+              <div className="text-sm text-white/70">Rising</div>
             </CardContent>
           </Card>
           
@@ -96,7 +97,7 @@ const Trending = () => {
               <div className="text-2xl font-bold text-success">
                 {trendingCommands.length}
               </div>
-              <div className="text-sm text-muted-foreground">Total Tracked</div>
+              <div className="text-sm text-white/70">Total Tracked</div>
             </CardContent>
           </Card>
           
@@ -174,6 +175,7 @@ const Trending = () => {
             Rankings update every hour based on global usage data • Last updated: 2 minutes ago
           </p>
         </motion.div>
+        </div>
       </div>
     </Layout>
   );

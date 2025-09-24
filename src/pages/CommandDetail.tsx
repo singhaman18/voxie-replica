@@ -63,8 +63,9 @@ const CommandDetail = () => {
   }
 
   return (
-    <Layout>
-      <div className="container mx-auto px-4 py-8 space-y-8">
+    <div className="min-h-screen bg-gradient-purple-pink">
+      <Layout>
+        <div className="container mx-auto px-4 py-8 space-y-8">
         {/* Breadcrumb */}
         <motion.div
           initial={{ opacity: 0, x: -20 }}
@@ -217,6 +218,7 @@ const CommandDetail = () => {
         </motion.div>
       </div>
     </Layout>
+    </div>
   );
 };
 
