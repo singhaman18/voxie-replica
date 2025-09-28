@@ -7,21 +7,35 @@ The ultimate command-line reference hub for developers. Discover, learn, and mas
 - **2000+ Commands** across 50+ categories
 - **Interactive Examples** with copy-to-clipboard functionality
 - **Trending Commands** to stay updated with popular tools
-- **Beautiful UI** with dark theme and smooth animations
-- **Responsive Design** for desktop and mobile
+- **Modern Interactive UI** with 3D animations and glass-morphism design
+- **Smooth Scroll Navigation** with floating nav and progress indicator
+- **3D Background Effects** powered by Vanta.js and Three.js
+- **Responsive Design** optimized for all devices
 - **Search & Filter** to find commands quickly
+- **Performance Optimized** with GSAP animations and GPU acceleration
 
 ## 🛠️ Tech Stack
 
 This project is built with modern technologies:
 
-- **React 18** - UI library
-- **TypeScript** - Type safety
-- **Vite** - Build tool & dev server
-- **Tailwind CSS** - Utility-first styling
-- **shadcn/ui** - Component library
-- **Framer Motion** - Smooth animations
+- **React 18** - UI library with hooks
+- **TypeScript** - Type safety and development experience  
+- **Vite** - Lightning-fast build tool & dev server
+- **Tailwind CSS** - Utility-first styling framework
+- **shadcn/ui** - Modern component library
+- **Framer Motion** - Advanced animations and page transitions
+- **GSAP** - Professional animation library for 3D effects
+- **Vanta.js + Three.js** - Interactive 3D backgrounds
 - **React Router** - Client-side routing
+
+## ✨ Latest Updates (September 2025)
+
+- 🎨 **Complete UI Redesign** - Modern dark card aesthetic with purple accents
+- 🌟 **3D Interactive Effects** - Vanta.js Halo background with animated elements  
+- 🧭 **Smooth Navigation** - Floating nav bar with active section detection
+- 📊 **Scroll Progress** - Real-time scroll progress indicator
+- ⚡ **Performance Optimized** - Throttled animations and GPU acceleration
+- 📱 **Mobile Enhanced** - Improved responsive design and touch interactions
 
 ## 🏃‍♂️ Getting Started
 
