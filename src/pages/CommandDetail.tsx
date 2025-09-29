@@ -63,9 +63,16 @@ const CommandDetail = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-purple-pink">
+    <div className="min-h-screen bg-gradient-to-br from-emerald-950 via-cyan-950 to-blue-950 relative overflow-hidden">
+      {/* Animated background elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute top-0 right-1/4 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl animate-float"></div>
+        <div className="absolute bottom-0 left-1/3 w-80 h-80 bg-cyan-500/10 rounded-full blur-3xl animate-float" style={{animationDelay: '2s'}}></div>
+        <div className="absolute top-1/2 left-1/4 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl animate-float" style={{animationDelay: '1s'}}></div>
+      </div>
+      
       <Layout>
-        <div className="container mx-auto px-4 py-8 space-y-8">
+        <div className="relative z-10 container mx-auto px-4 py-8 space-y-12">
         {/* Breadcrumb */}
         <motion.div
           initial={{ opacity: 0, x: -20 }}

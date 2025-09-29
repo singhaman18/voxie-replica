@@ -35,9 +35,16 @@ const CategoryDetail = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-blue-purple">
+    <div className="min-h-screen bg-gradient-to-br from-indigo-950 via-purple-950 to-pink-950 relative overflow-hidden">
+      {/* Animated background elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-indigo-500/10 rounded-full blur-3xl animate-float"></div>
+        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl animate-float" style={{animationDelay: '1.5s'}}></div>
+        <div className="absolute top-1/2 right-1/3 w-64 h-64 bg-pink-500/10 rounded-full blur-3xl animate-float" style={{animationDelay: '3s'}}></div>
+      </div>
+      
       <Layout>
-        <div className="container mx-auto px-4 py-8 space-y-8">
+        <div className="relative z-10 container mx-auto px-4 py-8 space-y-12">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}

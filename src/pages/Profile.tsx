@@ -72,62 +72,79 @@ const Profile = () => {
 
   return (
     <Layout>
-      <div className="min-h-screen bg-gradient-cyan-dark">
-        <div className="container mx-auto px-4 py-8 space-y-8">
+      <div className="min-h-screen bg-gradient-to-br from-slate-950 via-gray-950 to-slate-900 relative overflow-hidden">
+        {/* Animated background elements */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute top-1/4 left-1/3 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl animate-float"></div>
+          <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-cyan-500/5 rounded-full blur-3xl animate-float" style={{animationDelay: '2s'}}></div>
+        </div>
+        
+        {/* Grid pattern overlay */}
+        <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
+        
+        <div className="relative z-10 container mx-auto px-4 py-8 space-y-12">
         {/* Profile Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <Card className="border-border/50 shadow-card">
-            <CardHeader>
-              <div className="flex flex-col md:flex-row items-start md:items-center space-y-4 md:space-y-0 md:space-x-6">
-                <Avatar className="w-20 h-20 border-2 border-primary/20">
+          <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-3xl p-8 shadow-2xl">
+            <div className="flex flex-col md:flex-row items-start md:items-center space-y-6 md:space-y-0 md:space-x-8">
+              <div className="relative">
+                <Avatar className="w-24 h-24 border-4 border-cyan-500/30 shadow-2xl">
                   <AvatarImage src={mockUser.avatar} alt={mockUser.username} />
-                  <AvatarFallback className="text-2xl font-bold bg-gradient-primary text-primary-foreground">
+                  <AvatarFallback className="text-2xl font-bold bg-gradient-to-r from-cyan-500 to-blue-500 text-white">
                     {mockUser.username.slice(0, 2).toUpperCase()}
                   </AvatarFallback>
                 </Avatar>
-                
-                <div className="flex-1 space-y-2">
-                  <div className="flex items-center space-x-3">
-                    <h1 className="text-2xl md:text-3xl font-bold">{mockUser.username}</h1>
-                    <Badge variant="outline" className="bg-primary/10 text-primary border-primary/20">
-                      <Trophy className="h-3 w-3 mr-1" />
-                      Pro User
-                    </Badge>
-                  </div>
-                  
-                  <div className="flex flex-col md:flex-row md:items-center space-y-1 md:space-y-0 md:space-x-4 text-sm text-white/70">
-                    <div className="flex items-center space-x-1">
-                      <Mail className="h-4 w-4" />
-                      <span>{mockUser.email}</span>
-                    </div>
-                    <div className="flex items-center space-x-1">
-                      <Calendar className="h-4 w-4" />
-                      <span>Joined {new Date(mockUser.joinDate).toLocaleDateString()}</span>
-                    </div>
-                  </div>
-                </div>
-                
-                <div className="flex space-x-2">
-                  <Button variant="outline" onClick={handleEditProfile}>
-                    <Settings className="h-4 w-4 mr-2" />
-                    Settings
-                  </Button>
-                  <Button 
-                    variant="outline" 
-                    onClick={handleLogout}
-                    className="text-destructive hover:bg-destructive/10 hover:border-destructive/50"
-                  >
-                    <LogOut className="h-4 w-4 mr-2" />
-                    Logout
-                  </Button>
+                <div className="absolute -bottom-2 -right-2 p-2 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full">
+                  <User className="h-4 w-4 text-white" />
                 </div>
               </div>
-            </CardHeader>
-          </Card>
+              
+              <div className="flex-1 space-y-3">
+                <div className="flex flex-col md:flex-row md:items-center space-y-2 md:space-y-0 md:space-x-4">
+                  <h1 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
+                    {mockUser.username}
+                  </h1>
+                  <Badge variant="outline" className="bg-yellow-500/10 text-yellow-400 border-yellow-500/20 px-3 py-1 w-fit">
+                    <Trophy className="h-3 w-3 mr-1" />
+                    Pro User
+                  </Badge>
+                </div>
+                
+                <div className="flex flex-col md:flex-row md:items-center space-y-2 md:space-y-0 md:space-x-6 text-slate-300">
+                  <div className="flex items-center space-x-2">
+                    <Mail className="h-4 w-4 text-cyan-400" />
+                    <span>{mockUser.email}</span>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <Calendar className="h-4 w-4 text-blue-400" />
+                    <span>Joined {new Date(mockUser.joinDate).toLocaleDateString()}</span>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-3">
+                <Button 
+                  onClick={handleEditProfile}
+                  className="bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-700 hover:to-blue-700 text-white px-6 py-2 rounded-xl shadow-lg transition-all duration-200"
+                >
+                  <Settings className="h-4 w-4 mr-2" />
+                  Settings
+                </Button>
+                <Button 
+                  variant="outline" 
+                  onClick={handleLogout}
+                  className="border-red-500/30 text-red-400 hover:bg-red-500/10 hover:border-red-500/50 px-6 py-2 rounded-xl transition-all duration-200"
+                >
+                  <LogOut className="h-4 w-4 mr-2" />
+                  Logout
+                </Button>
+              </div>
+            </div>
+          </div>
         </motion.div>
 
         {/* Stats Grid */}
