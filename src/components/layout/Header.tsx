@@ -13,7 +13,8 @@ const Header = () => {
     { name: "Categories", href: "/categories" },
     { name: "Favorites", href: "/favorites" },
     { name: "Trending", href: "/trending" },
-    { name: "Profile", href: "/profile" }
+    { name: "Profile", href: "/profile" },
+    { name: "Admin", href: "/admin" }
   ];
 
   const authItems = [
