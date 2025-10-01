@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import Layout from "@/components/layout/Layout";
 import SearchBar from "@/components/ui/SearchBar";
 import CommandCard from "@/components/ui/CommandCard";
@@ -18,9 +17,9 @@ const Dashboard = () => {
       <div className="min-h-screen bg-gradient-to-br from-slate-950 via-blue-950 to-slate-900 relative overflow-hidden">
         {/* Animated background elements */}
         <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-float"></div>
-          <div className="absolute bottom-0 right-1/3 w-80 h-80 bg-cyan-500/10 rounded-full blur-3xl animate-float" style={{animationDelay: '1s'}}></div>
-          <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl animate-float" style={{animationDelay: '2s'}}></div>
+          <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-float will-change-transform"></div>
+          <div className="absolute bottom-0 right-1/3 w-80 h-80 bg-cyan-500/10 rounded-full blur-3xl animate-float will-change-transform" style={{animationDelay: '1s'}}></div>
+          <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl animate-float will-change-transform" style={{animationDelay: '2s'}}></div>
         </div>
         
         {/* Grid pattern overlay */}
@@ -28,12 +27,7 @@ const Dashboard = () => {
         
         <div className="relative z-10 container mx-auto px-4 py-8 space-y-12">
         {/* Welcome Section */}
-        <motion.section
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="text-center space-y-8 py-12"
-        >
+        <section className="text-center space-y-8 py-12 animate-fade-in-up">
           <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-3xl p-8 shadow-2xl">
             <div className="space-y-4">
               <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-500 bg-clip-text text-transparent">
@@ -52,15 +46,10 @@ const Dashboard = () => {
               />
             </div>
           </div>
-        </motion.section>
+        </section>
 
         {/* Trending Commands */}
-        <motion.section
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="space-y-8"
-        >
+        <section className="space-y-8 animate-fade-in-up" style={{animationDelay: '200ms'}}>
           <div className="flex items-center space-x-3 backdrop-blur-sm bg-white/5 rounded-2xl p-6 border border-white/10">
             <div className="p-3 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-xl">
               <TrendingUp className="h-6 w-6 text-white" />
@@ -81,15 +70,10 @@ const Dashboard = () => {
               />
             ))}
           </div>
-        </motion.section>
+        </section>
 
         {/* Favorites Preview */}
-        <motion.section
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="space-y-8"
-        >
+        <section className="space-y-8 animate-fade-in-up" style={{animationDelay: '400ms'}}>
           <div className="flex items-center justify-between backdrop-blur-sm bg-white/5 rounded-2xl p-6 border border-white/10">
             <div className="flex items-center space-x-3">
               <div className="p-3 bg-gradient-to-r from-red-500 to-pink-500 rounded-xl">
@@ -119,15 +103,10 @@ const Dashboard = () => {
               <p>No favorites yet. Start exploring commands!</p>
             </div>
           )}
-        </motion.section>
+        </section>
 
         {/* Categories Grid */}
-        <motion.section
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.6 }}
-          className="space-y-8"
-        >
+        <section className="space-y-8 animate-fade-in-up" style={{animationDelay: '600ms'}}>
           <div className="flex items-center space-x-3 backdrop-blur-sm bg-white/5 rounded-2xl p-6 border border-white/10">
             <div className="p-3 bg-gradient-to-r from-purple-500 to-blue-500 rounded-xl">
               <TrendingUp className="h-6 w-6 text-white" />
@@ -147,7 +126,7 @@ const Dashboard = () => {
               />
             ))}
           </div>
-        </motion.section>
+        </section>
         </div>
       </div>
     </Layout>

@@ -309,15 +309,16 @@ const AnimatedLines = () => {
   );
 };
 
-// Optimized Vanta Halo Background Component
+// Optimized Vanta Halo Background Component with performance improvements
 const VantaHaloBackground = ({ children }) => {
   const vantaRef = useRef(null);
   const vantaEffect = useRef(null);
 
   useEffect(() => {
-    // Delay initialization for better performance
-    const timer = setTimeout(() => {
-      if (!vantaEffect.current && vantaRef.current) {
+    // Only initialize if not already initialized and element exists
+    if (!vantaEffect.current && vantaRef.current) {
+      // Use requestAnimationFrame for better performance
+      requestAnimationFrame(() => {
         vantaEffect.current = HALO({
           el: vantaRef.current,
           THREE: THREE,
@@ -326,18 +327,17 @@ const VantaHaloBackground = ({ children }) => {
           gyroControls: false,
           minHeight: 200.00,
           minWidth: 200.00,
-          amplitudeFactor: 0.8, // Reduced for better performance
+          amplitudeFactor: 0.7, // Slightly reduced for better performance
           xOffset: 0.13,
           yOffset: 0.17,
-          size: 0.8, // Reduced for better performance
+          size: 0.7, // Reduced for better performance
           baseColor: 0x2a0845,
           backgroundColor: 0x000000
         });
-      }
-    }, 100);
+      });
+    }
 
     return () => {
-      clearTimeout(timer);
       if (vantaEffect.current) {
         vantaEffect.current.destroy();
         vantaEffect.current = null;

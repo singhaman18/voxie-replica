@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { Copy, Heart, Tag, TrendingUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -35,17 +34,11 @@ const CommandCard = ({ command, index = 0, showRank = false, onFavoriteToggle }:
   };
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ 
-        duration: 0.4, 
-        delay: index * 0.1,
-        ease: "easeOut"
-      }}
-      whileHover={{ 
-        scale: 1.02,
-        transition: { duration: 0.2 }
+    <div 
+      className="animate-fade-in-up hover:scale-[1.02] transition-all duration-200 will-change-transform"
+      style={{ 
+        animationDelay: `${index * 100}ms`,
+        animationFillMode: 'both'
       }}
     >
       <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-6 shadow-xl hover:shadow-2xl hover:bg-white/10 transition-all duration-300 group">
@@ -115,7 +108,7 @@ const CommandCard = ({ command, index = 0, showRank = false, onFavoriteToggle }:
           </div>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 };
 

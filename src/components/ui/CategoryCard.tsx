@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -32,17 +31,11 @@ const CategoryCard = ({ category, index = 0 }: CategoryCardProps) => {
   const IconComponent = iconMap[category.icon as keyof typeof iconMap];
 
   return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.9 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ 
-        duration: 0.4, 
-        delay: index * 0.1,
-        ease: "easeOut"
-      }}
-      whileHover={{ 
-        scale: 1.05,
-        transition: { duration: 0.2 }
+    <div 
+      className="animate-scale-in hover:scale-105 transition-all duration-200 will-change-transform"
+      style={{ 
+        animationDelay: `${index * 100}ms`,
+        animationFillMode: 'both'
       }}
     >
       <Link to={`/categories/${category.id}`}>
@@ -74,7 +67,7 @@ const CategoryCard = ({ category, index = 0 }: CategoryCardProps) => {
           </div>
         </div>
       </Link>
-    </motion.div>
+    </div>
   );
 };
 

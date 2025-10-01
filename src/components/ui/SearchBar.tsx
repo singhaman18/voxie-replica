@@ -1,10 +1,10 @@
 "use client";
 
-import { useState } from "react";
-import { motion } from "framer-motion";
+import { useState, useCallback, useEffect } from "react";
 import { Search, Command } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { useDebounce } from "@/lib/performance";
 
 interface SearchBarProps {
   placeholder?: string;
@@ -18,6 +18,19 @@ const SearchBar = ({
   className = "" 
 }: SearchBarProps) => {
   const [query, setQuery] = useState("");
+  const debouncedQuery = useDebounce(query, 300);
+
+  // Call onSearch with debounced query
+  const handleQueryChange = useCallback((value: string) => {
+    setQuery(value);
+  }, []);
+
+  // Effect to handle debounced search
+  useEffect(() => {
+    if (debouncedQuery) {
+      onSearch?.(debouncedQuery);
+    }
+  }, [debouncedQuery, onSearch]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -25,12 +38,7 @@ const SearchBar = ({
   };
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: -10 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.3 }}
-      className={`relative ${className}`}
-    >
+    <div className={`relative ${className}`}>
       <form onSubmit={handleSubmit} className="relative group">
         <div className="relative">
           <Command className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground group-focus-within:text-primary transition-colors" />
@@ -38,7 +46,7 @@ const SearchBar = ({
             type="text"
             placeholder={placeholder}
             value={query}
-            onChange={(e) => setQuery(e.target.value)}
+            onChange={(e) => handleQueryChange(e.target.value)}
             className="pl-10 pr-12 h-12 bg-card border-border focus:border-primary/50 focus:ring-primary/20 transition-all duration-200"
           />
           <Button
@@ -51,12 +59,9 @@ const SearchBar = ({
           </Button>
         </div>
         
-        <motion.div
-          className="absolute inset-0 rounded-md bg-gradient-to-r from-primary/20 to-accent/20 opacity-0 group-focus-within:opacity-100 transition-opacity duration-200 -z-10"
-          initial={false}
-        />
+        <div className="absolute inset-0 rounded-md bg-gradient-to-r from-primary/20 to-accent/20 opacity-0 group-focus-within:opacity-100 transition-opacity duration-200 -z-10" />
       </form>
-    </motion.div>
+    </div>
   );
 };
 
