@@ -6,8 +6,14 @@ import { Button } from "@/components/ui/button";
 import { Terminal, Code, Zap, Star, ArrowRight, GitBranch, Database, Shield, Users, Rocket, Search, Heart, TrendingUp, User, Menu, X } from "lucide-react";
 import { gsap } from "gsap";
 import { useRef, useEffect, useState } from "react";
-import * as THREE from 'three';
-import HALO from 'vanta/dist/vanta.halo.min';
+import CircularGallery from '@/components/ui/CircularGallery';
+import FlowingMenu from '@/components/ui/FlowingMenu';
+import PillNav from '@/components/ui/PillNav';
+
+const demoItems = [
+  { link: '#', text: 'Explore Our Features', image: 'https://picsum.photos/600/400?random=1' },
+  { link: '#', text: 'Discover powerful tools and resources designed to enhance your command-line experience', image: 'https://picsum.photos/600/400?random=2' }
+];
 
 // Smooth scroll utility
 const smoothScrollTo = (elementId: string) => {
@@ -96,16 +102,15 @@ const BackToTopButton = () => {
   );
 };
 
-// Optimized Navigation Component
+// Navigation Component using PillNav
 const SmoothScrollNav = () => {
-  const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
 
   const navItems = [
-    { name: 'Home', id: 'hero' },
-    { name: 'Features', id: 'features' },
-    { name: 'Advanced', id: 'advanced' },
-    { name: 'Get Started', id: 'cta' },
+    { label: 'Home', href: '#hero' },
+    { label: 'Features', href: '#features' },
+    { label: 'Advanced', href: '#advanced' },
+    { label: 'Get Started', href: '#cta' },
   ];
 
   useEffect(() => {
@@ -122,7 +127,7 @@ const SmoothScrollNav = () => {
       
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          setActiveSection(entry.target.id);
+          setActiveSection('#' + entry.target.id);
           lastUpdate = now;
         }
       });
@@ -132,7 +137,8 @@ const SmoothScrollNav = () => {
 
     // Delay observer setup to avoid initial render lag
     const timer = setTimeout(() => {
-      navItems.forEach(({ id }) => {
+      const sections = ['hero', 'features', 'advanced', 'cta'];
+      sections.forEach((id) => {
         const element = document.getElementById(id);
         if (element) observer.observe(element);
       });
@@ -144,65 +150,30 @@ const SmoothScrollNav = () => {
     };
   }, []);
 
+  const handleNavClick = (href: string) => {
+    const elementId = href.replace('#', '');
+    smoothScrollTo(elementId);
+  };
+
   return (
-    <nav className="fixed top-6 left-1/2 transform -translate-x-1/2 z-50">
-      <div className="bg-black/80 backdrop-blur-md border border-white/10 rounded-full px-6 py-3 shadow-2xl">
-        <div className="hidden md:flex items-center space-x-8">
-          {navItems.map((item) => (
-            <button
-              key={item.id}
-              onClick={() => smoothScrollTo(item.id)}
-              className={`relative text-sm font-medium transition-colors duration-200 ${
-                activeSection === item.id 
-                  ? 'text-white' 
-                  : 'text-white/70 hover:text-white'
-              }`}
-            >
-              {item.name}
-              {activeSection === item.id && (
-                <motion.div
-                  layoutId="activeIndicator"
-                  className="absolute -bottom-1 left-0 right-0 h-0.5 bg-primary rounded-full"
-                  transition={{ type: "spring", stiffness: 500, damping: 30 }}
-                />
-              )}
-            </button>
-          ))}
-        </div>
-
-        {/* Mobile menu button */}
-        <div className="md:hidden flex items-center">
-          <button
-            onClick={() => setIsOpen(!isOpen)}
-            className="text-white/70 hover:text-white transition-colors"
-          >
-            {isOpen ? <X size={20} /> : <Menu size={20} />}
-          </button>
-        </div>
-
-        {/* Mobile menu */}
-        {isOpen && (
-          <div className="absolute top-full left-0 right-0 mt-2 bg-black/90 backdrop-blur-md border border-white/10 rounded-2xl p-4 md:hidden">
-            {navItems.map((item) => (
-              <button
-                key={item.id}
-                onClick={() => {
-                  smoothScrollTo(item.id);
-                  setIsOpen(false);
-                }}
-                className={`block w-full text-left transition-colors duration-200 text-sm font-medium py-2 px-2 rounded-lg ${
-                  activeSection === item.id 
-                    ? 'text-white bg-primary/20' 
-                    : 'text-white/70 hover:text-white hover:bg-white/5'
-                }`}
-              >
-                {item.name}
-              </button>
-            ))}
-          </div>
-        )}
-      </div>
-    </nav>
+    <div className="fixed top-6 left-1/2 transform -translate-x-1/2 z-50">
+      <PillNav
+        logo="/logo.svg"
+        logoAlt="CMD Hub Logo"
+        items={navItems.map(item => ({
+          ...item,
+          onClick: () => handleNavClick(item.href)
+        }))}
+        activeHref={activeSection}
+        className="custom-nav"
+        ease="power2.easeOut"
+        baseColor="#000000"
+        pillColor="#ffffff"
+        hoveredPillTextColor="#000000"
+        pillTextColor="#000000"
+        onMobileMenuClick={() => {}}
+      />
+    </div>
   );
 };
 
@@ -309,48 +280,6 @@ const AnimatedLines = () => {
   );
 };
 
-// Optimized Vanta Halo Background Component with performance improvements
-const VantaHaloBackground = ({ children }) => {
-  const vantaRef = useRef(null);
-  const vantaEffect = useRef(null);
-
-  useEffect(() => {
-    // Only initialize if not already initialized and element exists
-    if (!vantaEffect.current && vantaRef.current) {
-      // Use requestAnimationFrame for better performance
-      requestAnimationFrame(() => {
-        vantaEffect.current = HALO({
-          el: vantaRef.current,
-          THREE: THREE,
-          mouseControls: true,
-          touchControls: true,
-          gyroControls: false,
-          minHeight: 200.00,
-          minWidth: 200.00,
-          amplitudeFactor: 0.7, // Slightly reduced for better performance
-          xOffset: 0.13,
-          yOffset: 0.17,
-          size: 0.7, // Reduced for better performance
-          baseColor: 0x2a0845,
-          backgroundColor: 0x000000
-        });
-      });
-    }
-
-    return () => {
-      if (vantaEffect.current) {
-        vantaEffect.current.destroy();
-        vantaEffect.current = null;
-      }
-    };
-  }, []);
-
-  return (
-    <div ref={vantaRef} className="relative w-full h-full">
-      {children}
-    </div>
-  );
-};
 
 // Optimized Interactive Card Component
 const InteractiveCard = ({ children, className = "", delay = 0 }) => {
@@ -443,7 +372,6 @@ const Landing = () => {
       <ScrollProgressIndicator />
       <SmoothScrollNav />
       <BackToTopButton />
-      <VantaHaloBackground>
         {/* Hero Section */}
         <section id="hero" className="relative overflow-hidden min-h-screen flex items-center">
         <div className="container mx-auto px-4 py-20">
@@ -455,12 +383,9 @@ const Landing = () => {
               transition={{ duration: 0.5 }}
               className="flex justify-center"
             >
-              <InteractiveCard delay={0} className="group">
-                <div className="relative p-8 rounded-[20px] bg-[#060010] border border-[#392e4e] overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_25px_rgba(132,0,255,0.3)]">
-                  <div className="absolute inset-0 bg-gradient-to-br from-purple-600/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  <Terminal className="h-16 w-16 text-white relative z-10 group-hover:text-purple-300 group-hover:scale-110 transition-all duration-300" />
-                </div>
-              </InteractiveCard>
+              <div className="relative p-8 rounded-[20px] bg-[#060010] border border-[#392e4e] overflow-hidden">
+                <Terminal className="h-16 w-16 text-white" />
+              </div>
             </motion.div>
 
             {/* Hero Headline */}
@@ -487,24 +412,24 @@ const Landing = () => {
               </p>
             </motion.div>
 
-            {/* Interactive Stats Cards */}
+            {/* Stats Cards */}
             <div className="grid grid-cols-3 gap-6 max-w-3xl mx-auto">
               {[
                 { number: "2K+", label: "Commands" },
                 { number: "50+", label: "Categories" },
                 { number: "10K+", label: "Developers" }
               ].map((stat, index) => (
-                <InteractiveCard
+                <motion.div
                   key={index}
-                  delay={0.5 + index * 0.1}
-                  className="group"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: 0.5 + index * 0.1, ease: "easeOut" }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  className="text-center bg-[#060010] border border-[#392e4e] rounded-[20px] p-6 overflow-hidden"
                 >
-                  <div className="text-center bg-[#060010] border border-[#392e4e] rounded-[20px] p-6 overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_25px_rgba(132,0,255,0.2)]">
-                    <div className="absolute inset-0 bg-gradient-to-br from-purple-600/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    <div className="text-3xl md:text-4xl font-bold text-white mb-2 relative z-10">{stat.number}</div>
-                    <div className="text-white/70 text-lg relative z-10">{stat.label}</div>
-                  </div>
-                </InteractiveCard>
+                  <div className="text-3xl md:text-4xl font-bold text-white mb-2">{stat.number}</div>
+                  <div className="text-white/70 text-lg">{stat.label}</div>
+                </motion.div>
               ))}
             </div>
 
@@ -518,17 +443,17 @@ const Landing = () => {
               <Button 
                 onClick={() => smoothScrollTo('features')}
                 size="lg"
-                className="btn-hero text-xl px-12 py-8 h-auto group"
+                className="text-xl px-12 py-8 h-auto"
               >
                 Explore Features
-                <ArrowRight className="ml-3 h-6 w-6 group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="ml-3 h-6 w-6" />
               </Button>
               
               <Button 
                 onClick={() => smoothScrollTo('cta')}
                 size="lg"
                 variant="outline"
-                className="btn-ghost text-xl px-12 py-8 h-auto"
+                className="text-xl px-12 py-8 h-auto"
               >
                 Get Started
                 <Rocket className="ml-3 h-6 w-6" />
@@ -545,96 +470,47 @@ const Landing = () => {
         </div>
       </section>
 
-      {/* Features Bento Grid Section */}
+      {/* Features Circular Gallery Section */}
       <section id="features" className="py-20 bg-background/30 backdrop-blur-sm">
         <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="text-center space-y-6 mb-16"
-          >
-            <h2 className="text-4xl md:text-5xl font-bold">
-              <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-                Explore Our Features
-              </span>
-            </h2>
-            <p className="text-xl text-white/70 max-w-3xl mx-auto">
-              Discover powerful tools and resources designed to enhance your command-line experience.
-            </p>
-          </motion.div>
+          <div style={{ height: '600px', position: 'relative' }}>
+            <FlowingMenu items={demoItems} />
+          </div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            viewport={{ once: true }}
-            className="max-w-6xl mx-auto"
-          >
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {[
+          <div style={{ height: '600px', position: 'relative', marginTop: '2rem' }}>
+            <CircularGallery 
+              bend={3} 
+              textColor="#ffffff" 
+              borderRadius={0.05} 
+              scrollEase={0.02}
+              items={[
                 {
-                  icon: <Terminal className="h-8 w-8" />,
-                  title: "Command Library",
-                  description: "Extensive collection of CLI commands",
-                  label: "Library"
+                  image: "https://images.unsplash.com/photo-1629654297299-c8506221ca97?w=800&h=600&fit=crop&crop=entropy&auto=format&fm=jpg&q=60&ixlib=rb-4.0.3",
+                  text: "Command Library"
                 },
                 {
-                  icon: <Search className="h-8 w-8" />,
-                  title: "Smart Search",
-                  description: "Find commands instantly with AI",
-                  label: "Search"
+                  image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&h=600&fit=crop&crop=entropy&auto=format&fm=jpg&q=60&ixlib=rb-4.0.3",
+                  text: "Smart Search"
                 },
                 {
-                  icon: <GitBranch className="h-8 w-8" />,
-                  title: "Categories",
-                  description: "Organized command categories for every need",
-                  label: "Organization"
+                  image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&h=600&fit=crop&crop=entropy&auto=format&fm=jpg&q=60&ixlib=rb-4.0.3",
+                  text: "Categories"
                 },
                 {
-                  icon: <Heart className="h-8 w-8" />,
-                  title: "Favorites",
-                  description: "Save your most used commands",
-                  label: "Bookmarks"
+                  image: "https://images.unsplash.com/photo-1516259762381-22954d7d3ad2?w=800&h=600&fit=crop&crop=entropy&auto=format&fm=jpg&q=60&ixlib=rb-4.0.3",
+                  text: "Favorites"
                 },
                 {
-                  icon: <TrendingUp className="h-8 w-8" />,
-                  title: "Trending",
-                  description: "Popular commands in community",
-                  label: "Popular"
+                  image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop&crop=entropy&auto=format&fm=jpg&q=60&ixlib=rb-4.0.3",
+                  text: "Trending"
                 },
                 {
-                  icon: <User className="h-8 w-8" />,
-                  title: "Profile",
-                  description: "Track your command usage",
-                  label: "Analytics"
+                  image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop&crop=entropy&auto=format&fm=jpg&q=60&ixlib=rb-4.0.3",
+                  text: "Profile"
                 }
-              ].map((feature, index) => (
-                <InteractiveCard
-                  key={index}
-                  delay={0.3 + index * 0.1}
-                  className="group"
-                >
-                  <div className="relative h-full bg-[#060010] border border-[#392e4e] rounded-[20px] p-6 overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_25px_rgba(132,0,255,0.2)] flex flex-col justify-between min-h-[200px]">
-                    <div className="absolute inset-0 bg-gradient-to-br from-purple-600/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    
-                    <div className="flex justify-between items-start relative z-10">
-                      <span className="text-white/80 text-sm font-medium">{feature.label}</span>
-                      <div className="p-2 rounded-lg bg-purple-600/20 text-purple-400 group-hover:bg-purple-600/40 group-hover:scale-110 transition-all duration-300">
-                        {feature.icon}
-                      </div>
-                    </div>
-                    
-                    <div className="space-y-2 relative z-10">
-                      <h3 className="text-white font-semibold text-lg group-hover:text-purple-300 transition-colors duration-300">{feature.title}</h3>
-                      <p className="text-white/70 text-sm leading-relaxed">{feature.description}</p>
-                    </div>
-                  </div>
-                </InteractiveCard>
-              ))}
-            </div>
-          </motion.div>
+              ]}
+            />
+          </div>
         </div>
       </section>
 
@@ -734,7 +610,6 @@ const Landing = () => {
           >
             <div className="relative bg-[#060010] border border-[#392e4e] rounded-[20px] p-12 overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_40px_rgba(132,0,255,0.3)]">
               <div className="absolute inset-0 bg-gradient-to-br from-purple-600/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              
               <div className="text-center space-y-8 relative z-10">
                 <div className="space-y-4">
                   <h2 className="text-4xl md:text-6xl font-bold">
@@ -746,7 +621,7 @@ const Landing = () => {
                     Join thousands of developers who've mastered their command-line skills with CMDHub.
                   </p>
                 </div>
-                
+              
                 <div className="flex flex-col sm:flex-row gap-6 justify-center">
                   <Button 
                     asChild
@@ -792,7 +667,6 @@ const Landing = () => {
           <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-full h-full bg-gradient-to-b from-primary/5 to-transparent" />
         </div>
       </section>
-      </VantaHaloBackground>
     </div>
   );
 };

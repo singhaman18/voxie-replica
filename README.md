@@ -7,9 +7,8 @@ The ultimate command-line reference hub for developers. Discover, learn, and mas
 - **2000+ Commands** across 50+ categories
 - **Interactive Examples** with copy-to-clipboard functionality
 - **Trending Commands** to stay updated with popular tools
-- **Modern Interactive UI** with 3D animations and glass-morphism design
+- **Modern Interactive UI** with clean animations and glass-morphism design
 - **Smooth Scroll Navigation** with floating nav and progress indicator
-- **3D Background Effects** powered by Vanta.js and Three.js
 - **Responsive Design** optimized for all devices
 - **Search & Filter** to find commands quickly
 - **Performance Optimized** with GSAP animations and GPU acceleration
@@ -24,8 +23,7 @@ This project is built with modern technologies:
 - **Tailwind CSS** - Utility-first styling framework
 - **shadcn/ui** - Modern component library
 - **Framer Motion** - Advanced animations and page transitions
-- **GSAP** - Professional animation library for 3D effects
-- **Vanta.js + Three.js** - Interactive 3D backgrounds
+- **GSAP** - Professional animation library for smooth effects
 - **React Router** - Client-side routing
 
 ## ✨ Latest Updates (September 2025)
