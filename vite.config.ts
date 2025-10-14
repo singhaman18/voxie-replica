@@ -19,11 +19,14 @@ export default defineConfig(({ mode }) => ({
     target: "esnext",
     minify: "terser",
     cssMinify: true,
+    sourcemap: false,
     rollupOptions: {
       output: {
         manualChunks: {
           // Vendor chunks for better caching
           vendor: ["react", "react-dom"],
+          motion: ["framer-motion"],
+          three: ["three", "postprocessing"],
           ui: [
             "@radix-ui/react-dialog",
             "@radix-ui/react-toast",
@@ -60,5 +63,7 @@ export default defineConfig(({ mode }) => ({
   // Performance optimizations
   esbuild: {
     drop: mode === "production" ? ["console", "debugger"] : [],
+    legalComments: "none",
+    treeShaking: true,
   },
 }));

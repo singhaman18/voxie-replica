@@ -71,6 +71,7 @@ export default {
         "gradient-green-cyan": "linear-gradient(90deg, #2BF598 0%, #00C9FF 100%)",
         "gradient-blue-purple": "linear-gradient(90deg, #00C9FF 0%, #8E2DE2 100%)",
         "gradient-cyan-dark": "linear-gradient(90deg, #0ED2F7 0%, #24243E 100%)",
+        "gradient-radial": "radial-gradient(ellipse at center, var(--tw-gradient-stops))",
       },
       boxShadow: {
         "card": "var(--shadow-card)",
@@ -85,6 +86,22 @@ export default {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
+      },
+      fontFamily: {
+        // Primary: Modern & Clean (Current Implementation)
+        'sans': ['Inter', 'ui-sans-serif', 'system-ui'],
+        'heading': ['Poppins', 'ui-sans-serif', 'system-ui'],
+        'mono': ['Fira Code', 'ui-monospace', 'SFMono-Regular'],
+        
+        // Alternative 1: Tech-Forward & Functional
+        'tech-heading': ['JetBrains Mono', 'ui-monospace', 'SFMono-Regular'],
+        'tech-body': ['IBM Plex Sans', 'ui-sans-serif', 'system-ui'],
+        'tech-mono': ['JetBrains Mono', 'ui-monospace', 'SFMono-Regular'],
+        
+        // Alternative 2: Minimalist & Versatile
+        'minimal-heading': ['Montserrat', 'ui-sans-serif', 'system-ui'],
+        'minimal-body': ['Source Sans Pro', 'ui-sans-serif', 'system-ui'],
+        'minimal-mono': ['Source Code Pro', 'ui-monospace', 'SFMono-Regular'],
       },
       translate: {
         '101': '101%',

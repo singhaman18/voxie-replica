@@ -6,14 +6,65 @@
     <title>CMDHub - Master Every Command</title>
     <meta name="description" content="The ultimate command-line reference hub. Discover, learn, and master commands for Git, Docker, Linux, and more." />
     <meta name="author" content="devanshuK45" />
+    <meta name="keywords" content="command line, CLI, terminal, git commands, docker commands, linux commands, developer tools" />
+    <meta name="theme-color" content="#6366f1" />
+    
+    <!-- Performance Optimizations -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="//fonts.gstatic.com" />
+    <link rel="modulepreload" href="/src/main.tsx" />
+    <link rel="modulepreload" href="/src/components/ui/PillNav.tsx" />
+    
+    <!-- Critical CSS inlined -->
+    <style>
+      /* Critical Above-the-fold styles */
+      body { margin: 0; background: rgb(13 11 32); color: white; font-family: system-ui, -apple-system, sans-serif; }
+      .loading-fallback { display: flex; align-items: center; justify-content: center; min-height: 100vh; font-size: 1.2rem; }
+      /* Prevent FOUC */
+      .neon-glow { color: #8b5cf6; text-shadow: 0 0 10px #8b5cf6; }
+      .text-neon { color: #a855f7; }
+      .hero-title { font-size: clamp(3rem, 8vw, 6rem); font-weight: 700; line-height: 1.1; }
+      /* Fast loading skeleton */
+      .skeleton { background: linear-gradient(90deg, #1a1a2e 25%, #16213e 50%, #1a1a2e 75%); background-size: 200% 100%; animation: loading 1.5s infinite; }
+      @keyframes loading { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+    </style>
+    
+    <!-- Preload critical assets -->
+    <link rel="preload" href="/assets/Gemini_Generated_Image_2w2hgw2w2hgw2w2h.png" as="image" />
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/assets/Gemini_Generated_Image_2w2hgw2w2hgw2w2h.png" />
+    <link rel="shortcut icon" type="image/png" href="/assets/Gemini_Generated_Image_2w2hgw2w2hgw2w2h.png" />
+    <link rel="apple-touch-icon" href="/assets/Gemini_Generated_Image_2w2hgw2w2hgw2w2h.png" />
 
+    <!-- SEO & Social Media -->
     <meta property="og:title" content="CMDHub - Master Every Command" />
     <meta property="og:description" content="The ultimate command-line reference hub for developers" />
     <meta property="og:type" content="website" />
+    <meta property="og:image" content="/assets/Gemini_Generated_Image_2w2hgw2w2hgw2w2h.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="CMDHub - Master Every Command" />
+    <meta name="twitter:description" content="The ultimate command-line reference hub for developers" />
+    <meta name="robots" content="index, follow" />
+    
+    <!-- Google Fonts - Optimized Loading -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Critical fonts with display=swap and preload -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap"></noscript>
+    
+    <!-- Non-critical fonts loaded asynchronously -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Fira+Code:wght@400&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Fira+Code:wght@400&display=swap"></noscript>
    
   </head>
 
   <body>
+    <!-- Skip Navigation for Accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

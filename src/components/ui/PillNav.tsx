@@ -243,14 +243,14 @@ const PillNav: React.FC<PillNavProps> = ({
     ['--pill-text']: resolvedPillTextColor,
     ['--nav-h']: '42px',
     ['--logo']: '36px',
-    ['--pill-pad-x']: '18px',
-    ['--pill-gap']: '3px'
+    ['--pill-pad-x']: '28px',
+    ['--pill-gap']: '24px'
   } as React.CSSProperties;
 
   return (
-    <div className="absolute top-[1em] z-[1000] w-full left-0 md:w-auto md:left-auto">
+    <div className={className?.includes('relative') ? '' : 'absolute top-[1em] z-[1000] w-full left-0'}>
       <nav
-        className={`w-full md:w-max flex items-center justify-between md:justify-start box-border px-4 md:px-0 ${className}`}
+        className={`w-full max-w-4xl mx-auto flex items-center justify-between md:justify-center box-border px-4 md:px-8 ${className}`}
         aria-label="Primary"
         style={cssVars}
       >
@@ -293,15 +293,17 @@ const PillNav: React.FC<PillNavProps> = ({
 
         <div
           ref={navItemsRef}
-          className="relative items-center rounded-full hidden md:flex ml-2"
+          className="relative items-center rounded-full hidden md:flex flex-1 ml-4 mr-4"
           style={{
             height: 'var(--nav-h)',
-            background: 'var(--base, #000)'
+            background: 'var(--base, #000)',
+            padding: '0 32px',
+            minWidth: '600px'
           }}
         >
           <ul
             role="menubar"
-            className="list-none flex items-stretch m-0 p-[3px] h-full"
+            className="list-none flex items-stretch justify-between w-full m-0 p-[3px] h-full"
             style={{ gap: 'var(--pill-gap)' }}
           >
             {items.map((item, i) => {
@@ -440,11 +442,11 @@ const PillNav: React.FC<PillNavProps> = ({
               background: 'var(--pill-bg, #fff)',
               color: 'var(--pill-text, #fff)'
             };
-            const hoverIn = (e: React.MouseEvent<HTMLAnchorElement>) => {
+            const hoverIn = (e: React.MouseEvent<HTMLElement>) => {
               e.currentTarget.style.background = 'var(--base)';
               e.currentTarget.style.color = 'var(--hover-text, #fff)';
             };
-            const hoverOut = (e: React.MouseEvent<HTMLAnchorElement>) => {
+            const hoverOut = (e: React.MouseEvent<HTMLElement>) => {
               e.currentTarget.style.background = 'var(--pill-bg, #fff)';
               e.currentTarget.style.color = 'var(--pill-text, #fff)';
             };

@@ -1,18 +1,64 @@
 "use client";
 
+/*
+ * CMDHub Typography System Usage Guide
+ * 
+ * PRIMARY (Modern & Clean) - Currently Active:
+ * - Headings: .heading-neon, .heading-primary, .heading-secondary
+ * - Body: .body-text, .body-medium
+ * - Code: .code-neon
+ * 
+ * ALTERNATIVE 1 (Tech-Forward & Functional):
+ * - Headings: .heading-tech
+ * - Body: .body-tech, .body-tech-medium  
+ * - Code: .code-tech
+ * 
+ * ALTERNATIVE 2 (Minimalist & Versatile):
+ * - Headings: .heading-minimal, .heading-minimal-bold
+ * - Body: .body-minimal
+ * - Code: .code-minimal
+ * 
+ * To switch systems globally, add class to <body>:
+ * - .typography-modern (default)
+ * - .typography-tech 
+ * - .typography-minimal
+ */
+
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Terminal, Code, Zap, Star, ArrowRight, GitBranch, Database, Shield, Users, Rocket, Search, Heart, TrendingUp, User, Menu, X } from "lucide-react";
+import { Terminal, Code, Zap, Star, ArrowRight, GitBranch, Database, Shield, Users, Rocket } from "lucide-react";
 import { gsap } from "gsap";
-import { useRef, useEffect, useState } from "react";
-import CircularGallery from '@/components/ui/CircularGallery';
-import FlowingMenu from '@/components/ui/FlowingMenu';
+import { useRef, useEffect, useState, lazy, Suspense, useCallback } from "react";
 import PillNav from '@/components/ui/PillNav';
+import CountUp from '@/components/ui/CountUp';
+
+// Performance optimization helper
+const preloadComponents = () => {
+  // Preload components when user scrolls or interacts
+  setTimeout(() => {
+    import(/* webpackChunkName: "gallery" */ '@/components/ui/CircularGallery');
+    import(/* webpackChunkName: "curved-loop" */ '@/components/ui/CurvedLoop');
+  }, 2000);
+};
+
+// Lazy load heavy components with optimized loading and preloading
+const CircularGallery = lazy(() => 
+  import(/* webpackChunkName: "gallery" */ '@/components/ui/CircularGallery')
+);
+const FlowingMenu = lazy(() => 
+  import(/* webpackChunkName: "menu" */ '@/components/ui/FlowingMenu')
+);
+const CurvedLoop = lazy(() => 
+  import(/* webpackChunkName: "curved-loop" */ '@/components/ui/CurvedLoop')
+);
+const Hyperspeed = lazy(() => 
+  import(/* webpackChunkName: "hyperspeed" */ '@/components/ui/Hyperspeed')
+);
 
 const demoItems = [
-  { link: '#', text: 'Explore Our Features', image: 'https://picsum.photos/600/400?random=1' },
-  { link: '#', text: 'Discover powerful tools and resources designed to enhance your command-line experience', image: 'https://picsum.photos/600/400?random=2' }
+  { link: '#', text: 'Explore Our Features', image: 'data:image/svg+xml,%3Csvg width="600" height="400" xmlns="http://www.w3.org/2000/svg"%3E%3Cdefs%3E%3ClinearGradient id="g1"%3E%3Cstop offset="0%" stop-color="%236366f1"/%3E%3Cstop offset="100%" stop-color="%238b5cf6"/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width="100%" height="100%" fill="url(%23g1)"/%3E%3C/svg%3E' },
+  { link: '#', text: 'Discover powerful tools and resources designed to enhance your command-line experience', image: 'data:image/svg+xml,%3Csvg width="600" height="400" xmlns="http://www.w3.org/2000/svg"%3E%3Cdefs%3E%3ClinearGradient id="g2"%3E%3Cstop offset="0%" stop-color="%23ec4899"%3E%3Cstop offset="100%" stop-color="%23f59e0b"/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width="100%" height="100%" fill="url(%23g2)"/%3E%3C/svg%3E' }
 ];
 
 // Smooth scroll utility
@@ -96,8 +142,11 @@ const BackToTopButton = () => {
       onClick={() => smoothScrollTo('hero')}
       className="fixed bottom-8 right-8 z-40 p-3 bg-primary hover:bg-primary/80 text-white rounded-full shadow-lg backdrop-blur-sm border border-white/10 hover:shadow-xl transition-all duration-200"
       style={{ pointerEvents: isVisible ? 'auto' : 'none' }}
+      aria-label="Scroll to top of page"
+      title="Scroll to top"
+      type="button"
     >
-      <ArrowRight className="h-6 w-6 rotate-[-90deg]" />
+      <ArrowRight className="h-6 w-6 rotate-[-90deg]" aria-hidden="true" />
     </motion.button>
   );
 };
@@ -156,7 +205,7 @@ const SmoothScrollNav = () => {
   };
 
   return (
-    <div className="fixed top-6 left-1/2 transform -translate-x-1/2 z-50">
+    <div className="absolute top-6 left-1/2 transform -translate-x-1/2 z-50 w-auto">
       <PillNav
         logo="/logo.svg"
         logoAlt="CMD Hub Logo"
@@ -165,7 +214,7 @@ const SmoothScrollNav = () => {
           onClick: () => handleNavClick(item.href)
         }))}
         activeHref={activeSection}
-        className="custom-nav"
+        className="custom-nav relative"
         ease="power2.easeOut"
         baseColor="#000000"
         pillColor="#ffffff"
@@ -368,10 +417,40 @@ const InteractiveCard = ({ children, className = "", delay = 0 }) => {
 
 const Landing = () => {
   return (
-    <div className="min-h-screen bg-gradient-hero">
-      <ScrollProgressIndicator />
-      <SmoothScrollNav />
-      <BackToTopButton />
+    <div className="min-h-screen relative">
+      {/* Hyperspeed 3D Highway Background - Optimized Loading */}
+      <div className="fixed inset-0 z-0">
+        <Suspense fallback={
+          <div className="w-full h-full bg-gradient-to-br from-purple-900/30 via-blue-900/20 to-black">
+            <div className="absolute inset-0 opacity-20">
+              {[...Array(5)].map((_, i) => (
+                <div
+                  key={i}
+                  className="absolute h-px bg-gradient-to-r from-transparent via-purple-400 to-transparent animate-pulse"
+                  style={{
+                    top: `${20 + i * 15}%`,
+                    left: '0%',
+                    right: '0%',
+                    animationDelay: `${i * 0.5}s`,
+                    animationDuration: '3s'
+                  }}
+                />
+              ))}
+            </div>
+          </div>
+        }>
+          <Hyperspeed />
+        </Suspense>
+      </div>
+      
+      {/* Content with higher z-index */}
+      <div className="relative z-10">
+        <ScrollProgressIndicator />
+        <SmoothScrollNav />
+        <BackToTopButton />
+        
+        {/* Main Content */}
+        <main id="main-content">
         {/* Hero Section */}
         <section id="hero" className="relative overflow-hidden min-h-screen flex items-center">
         <div className="container mx-auto px-4 py-20">
@@ -383,8 +462,14 @@ const Landing = () => {
               transition={{ duration: 0.5 }}
               className="flex justify-center"
             >
-              <div className="relative p-8 rounded-[20px] bg-[#060010] border border-[#392e4e] overflow-hidden">
-                <Terminal className="h-16 w-16 text-white" />
+              <div className="relative w-32 h-32 rounded-[20px] card-neon overflow-hidden p-0">
+                <img 
+                  src="/assets/Gemini_Generated_Image_2w2hgw2w2hgw2w2h.png" 
+                  alt="CMDHub Logo - Master Every Command" 
+                  className="w-full h-full object-cover"
+                  loading="eager"
+                  fetchPriority="high"
+                />
               </div>
             </motion.div>
 
@@ -396,28 +481,34 @@ const Landing = () => {
               className="space-y-8"
             >
               <div className="space-y-4">
-                <h1 className="text-6xl md:text-8xl font-bold leading-tight">
-                  <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent animate-gradient">
-                    CMDHub
-                  </span>
+                <h1 className="text-6xl md:text-8xl font-bold leading-tight heading-neon">
+                  CMDHub
                 </h1>
-                <p className="text-2xl md:text-3xl text-white/80 font-medium">
+                <p className="text-2xl md:text-3xl font-medium" style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 600, color: '#FFFFFF' }}>
                   Master Every Command
                 </p>
               </div>
               
-              <p className="text-xl md:text-2xl text-white/70 max-w-4xl mx-auto leading-relaxed">
-                The ultimate collection of command-line tools, scripts, and best practices. 
-                From Git to Docker, from Linux to Windows PowerShell - we've got you covered.
-              </p>
+              <div className="w-full max-w-6xl mx-auto">
+                <Suspense fallback={<div className="h-32 flex items-center justify-center text-neon">Loading...</div>}>
+                  <CurvedLoop 
+                    marqueeText="The ultimate collection of command-line tools ✦ scripts ✦ and best practices ✦ From Git to Docker ✦ from Linux to Windows PowerShell ✦ we've got you covered ✦"
+                    speed={2}
+                    curveAmount={200}
+                    direction="right"
+                    interactive={true}
+                    className="text-neon fill-primary text-2xl md:text-3xl"
+                  />
+                </Suspense>
+              </div>
             </motion.div>
 
             {/* Stats Cards */}
             <div className="grid grid-cols-3 gap-6 max-w-3xl mx-auto">
               {[
-                { number: "2K+", label: "Commands" },
-                { number: "50+", label: "Categories" },
-                { number: "10K+", label: "Developers" }
+                { to: 2000, suffix: "+", label: "Commands" },
+                { to: 50, suffix: "+", label: "Categories" },
+                { to: 10000, suffix: "+", label: "Developers" }
               ].map((stat, index) => (
                 <motion.div
                   key={index}
@@ -425,10 +516,21 @@ const Landing = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.4, delay: 0.5 + index * 0.1, ease: "easeOut" }}
                   viewport={{ once: true, margin: "-50px" }}
-                  className="text-center bg-[#060010] border border-[#392e4e] rounded-[20px] p-6 overflow-hidden"
+                  className="text-center card-neon rounded-[20px] p-6 overflow-hidden"
                 >
-                  <div className="text-3xl md:text-4xl font-bold text-white mb-2">{stat.number}</div>
-                  <div className="text-white/70 text-lg">{stat.label}</div>
+                  <div className="text-3xl md:text-4xl font-bold mb-2 text-neon-glow">
+                    <CountUp
+                      from={0}
+                      to={stat.to}
+                      separator=","
+                      direction="up"
+                      duration={2}
+                      delay={0.5 + index * 0.2}
+                      className="count-up-text"
+                    />
+                    {stat.suffix}
+                  </div>
+                  <div className="text-lg text-subtle">{stat.label}</div>
                 </motion.div>
               ))}
             </div>
@@ -443,7 +545,8 @@ const Landing = () => {
               <Button 
                 onClick={() => smoothScrollTo('features')}
                 size="lg"
-                className="text-xl px-12 py-8 h-auto"
+                className="btn-neon text-xl px-12 py-8 h-auto font-semibold"
+                style={{ fontFamily: 'Poppins, sans-serif' }}
               >
                 Explore Features
                 <ArrowRight className="ml-3 h-6 w-6" />
@@ -453,7 +556,8 @@ const Landing = () => {
                 onClick={() => smoothScrollTo('cta')}
                 size="lg"
                 variant="outline"
-                className="text-xl px-12 py-8 h-auto"
+                className="text-xl px-12 py-8 h-auto border-primary/50 hover:border-primary text-foreground hover:bg-primary/10 font-semibold"
+                style={{ fontFamily: 'Poppins, sans-serif' }}
               >
                 Get Started
                 <Rocket className="ml-3 h-6 w-6" />
@@ -462,54 +566,111 @@ const Landing = () => {
           </div>
         </div>
 
-        {/* Background Elements */}
-        <div className="absolute inset-0 -z-10 overflow-hidden">
-          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-float" />
-          <div className="absolute bottom-1/4 right-1/4 w-72 h-72 bg-accent/10 rounded-full blur-3xl animate-float" style={{ animationDelay: "-2s" }} />
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] bg-gradient-radial opacity-10 blur-3xl" />
-        </div>
+
       </section>
 
       {/* Features Circular Gallery Section */}
       <section id="features" className="py-20 bg-background/30 backdrop-blur-sm">
         <div className="container mx-auto px-4">
-          <div style={{ height: '600px', position: 'relative' }}>
+          <div style={{ height: '300px', position: 'relative' }}>
             <FlowingMenu items={demoItems} />
           </div>
 
-          <div style={{ height: '600px', position: 'relative', marginTop: '2rem' }}>
-            <CircularGallery 
-              bend={3} 
-              textColor="#ffffff" 
-              borderRadius={0.05} 
-              scrollEase={0.02}
-              items={[
-                {
-                  image: "https://images.unsplash.com/photo-1629654297299-c8506221ca97?w=800&h=600&fit=crop&crop=entropy&auto=format&fm=jpg&q=60&ixlib=rb-4.0.3",
-                  text: "Command Library"
-                },
-                {
-                  image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&h=600&fit=crop&crop=entropy&auto=format&fm=jpg&q=60&ixlib=rb-4.0.3",
-                  text: "Smart Search"
-                },
-                {
-                  image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&h=600&fit=crop&crop=entropy&auto=format&fm=jpg&q=60&ixlib=rb-4.0.3",
-                  text: "Categories"
-                },
-                {
-                  image: "https://images.unsplash.com/photo-1516259762381-22954d7d3ad2?w=800&h=600&fit=crop&crop=entropy&auto=format&fm=jpg&q=60&ixlib=rb-4.0.3",
-                  text: "Favorites"
-                },
-                {
-                  image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop&crop=entropy&auto=format&fm=jpg&q=60&ixlib=rb-4.0.3",
-                  text: "Trending"
-                },
-                {
-                  image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop&crop=entropy&auto=format&fm=jpg&q=60&ixlib=rb-4.0.3",
-                  text: "Profile"
-                }
-              ]}
-            />
+          {/* Responsive CircularGallery Container */}
+          <div className="relative mt-8">
+            {/* Desktop and Tablet View */}
+            <div className="hidden sm:block" style={{ height: '450px', position: 'relative' }}>
+              <Suspense fallback={<div className="w-full h-[450px] bg-card/20 rounded-lg flex items-center justify-center text-neon">Loading Gallery...</div>}>
+                <CircularGallery 
+                  bend={3} 
+                  textColor="#ffffff" 
+                  borderRadius={0.05} 
+                  scrollEase={0.02}
+                  font="bold 28px Figtree"
+                  items={[
+                    {
+                      image: "data:image/svg+xml,%3Csvg width='400' height='300' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3ClinearGradient id='grad1' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23667eea;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23764ba2;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23grad1)' /%3E%3C/svg%3E",
+                      text: "Command Library"
+                    },
+                    {
+                      image: "data:image/svg+xml,%3Csvg width='400' height='300' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3ClinearGradient id='grad2' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23f093fb;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23f5576c;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23grad2)' /%3E%3C/svg%3E",
+                      text: "Smart Search"
+                    },
+                    {
+                      image: "data:image/svg+xml,%3Csvg width='400' height='300' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3ClinearGradient id='grad3' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%234facfe;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%2300f2fe;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23grad3)' /%3E%3C/svg%3E",
+                      text: "Categories"
+                    },
+                    {
+                      image: "data:image/svg+xml,%3Csvg width='400' height='300' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3ClinearGradient id='grad4' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23a8edea;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23fed6e3;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23grad4)' /%3E%3C/svg%3E",
+                      text: "Favorites"
+                    },
+                    {
+                      image: "data:image/svg+xml,%3Csvg width='400' height='300' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3ClinearGradient id='grad5' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23ffecd2;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23fcb69f;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23grad5)' /%3E%3C/svg%3E",
+                      text: "Trending"
+                    },
+                    {
+                      image: "data:image/svg+xml,%3Csvg width='400' height='300' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3ClinearGradient id='grad6' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23a18cd1;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23fbc2eb;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23grad6)' /%3E%3C/svg%3E",
+                      text: "Profile"
+                    }
+                  ]}
+                />
+              </Suspense>
+            </div>
+            
+            {/* Mobile View - Simplified Card Layout */}
+            <div className="block sm:hidden">
+              <div className="grid grid-cols-2 gap-4 px-4">
+                {[
+                  {
+                    image: "https://images.unsplash.com/photo-1629654297299-c8506221ca97?w=400&h=300&fit=crop&crop=entropy&auto=format&fm=jpg&q=60&ixlib=rb-4.0.3",
+                    text: "Command Library"
+                  },
+                  {
+                    image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&h=300&fit=crop&crop=entropy&auto=format&fm=jpg&q=60&ixlib=rb-4.0.3",
+                    text: "Smart Search"
+                  },
+                  {
+                    image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=400&h=300&fit=crop&crop=entropy&auto=format&fm=jpg&q=60&ixlib=rb-4.0.3",
+                    text: "Categories"
+                  },
+                  {
+                    image: "https://images.unsplash.com/photo-1516259762381-22954d7d3ad2?w=400&h=300&fit=crop&crop=entropy&auto=format&fm=jpg&q=60&ixlib=rb-4.0.3",
+                    text: "Favorites"
+                  },
+                  {
+                    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop&crop=entropy&auto=format&fm=jpg&q=60&ixlib=rb-4.0.3",
+                    text: "Trending"
+                  },
+                  {
+                    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=300&fit=crop&crop=entropy&auto=format&fm=jpg&q=60&ixlib=rb-4.0.3",
+                    text: "Profile"
+                  }
+                ].map((item, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ delay: index * 0.1 }}
+                    viewport={{ once: true }}
+                    className="relative overflow-hidden rounded-lg bg-card hover:bg-card-hover border border-border transition-all duration-300 group"
+                  >
+                    <div className="aspect-[4/3] overflow-hidden">
+                      <img
+                        src={item.image}
+                        alt={`${item.text} - CMDHub Feature Preview`}
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    </div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                    <div className="absolute bottom-0 left-0 right-0 p-3">
+                      <h3 className="text-white font-semibold text-sm">{item.text}</h3>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -667,6 +828,8 @@ const Landing = () => {
           <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-full h-full bg-gradient-to-b from-primary/5 to-transparent" />
         </div>
       </section>
+        </main>
+      </div>
     </div>
   );
 };
