@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import Layout from "@/components/layout/Layout";
 import CategoryCard from "@/components/ui/CategoryCard";
 import SearchBar from "@/components/ui/SearchBar";
-import { categories } from "@/lib/mockData";
+import { categories, commands } from "@/lib/mockData";
 import { Grid3X3 } from "lucide-react";
 
 const Categories = () => {
@@ -84,9 +84,7 @@ const Categories = () => {
               <div className="text-white/70">Categories</div>
             </div>
             <div className="space-y-2">
-              <div className="text-3xl font-bold text-accent">
-                {categories.reduce((sum, cat) => sum + cat.commandCount, 0)}
-              </div>
+              <div className="text-3xl font-bold text-accent">{commands.length}</div>
               <div className="text-white/70">Total Commands</div>
             </div>
             <div className="space-y-2">
