@@ -1,166 +1,228 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
-import { workflowSteps } from "@/data/content";
-import { cn } from "@/lib/utils";
+import { motion, Variants } from "framer-motion";
+import { CloudCog, Shield, FileSearch, Wrench } from "lucide-react";
+
+const steps = [
+  {
+    title: "Connect GCP Project",
+    desc: "Securely authenticate and sync your cloud environment.",
+    icon: <CloudCog className="h-6 w-6 text-sky-400" />,
+  },
+  {
+    title: "Scan Workloads",
+    desc: "Cyra analyzes APIs, workloads, permissions, and posture.",
+    icon: <Shield className="h-6 w-6 text-blue-400" />,
+  },
+  {
+    title: "Insights & Reports",
+    desc: "Detailed AI insights, compliance checks, and threat paths.",
+    icon: <FileSearch className="h-6 w-6 text-purple-400" />,
+  },
+  {
+    title: "Fix Issues",
+    desc: "Get guided remediation steps and continuous monitoring.",
+    icon: <Wrench className="h-6 w-6 text-green-400" />,
+  },
+];
+
+/* -------------------------
+   Variants
+-------------------------- */
+
+const container: Variants = {
+  hidden: {},
+  show: {
+    transition: { staggerChildren: 0.35 },
+  },
+};
+
+const makeCardVariant = (isLeft: boolean): Variants => ({
+  hidden: {
+    opacity: 0,
+    x: isLeft ? -120 : 120,
+    scale: 0.9,
+  },
+  show: {
+    opacity: 1,
+    x: 0,
+    scale: 1,
+    transition: {
+      duration: 0.7,
+      ease: [0.25, 0.1, 0.25, 1],
+    },
+  },
+});
+
+const lineGrow: Variants = {
+  hidden: { scaleX: 0, opacity: 0 },
+  show: {
+    scaleX: 1,
+    opacity: 1,
+    transition: {
+      duration: 0.4,
+      ease: [0.33, 1, 0.68, 1],
+    },
+  },
+};
+
+const dotPop: Variants = {
+  hidden: { scale: 0, opacity: 0 },
+  show: {
+    scale: 1,
+    opacity: 1,
+    transition: {
+      duration: 0.35,
+      ease: [0.175, 0.885, 0.32, 1.275],
+    },
+  },
+};
+
+const numberPop: Variants = {
+  hidden: { scale: 0.4, opacity: 0, y: -10 },
+  show: {
+    scale: 1,
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.35,
+      ease: [0.25, 0.1, 0.25, 1],
+    },
+  },
+};
+
+/* -------------------------
+   COMPONENT
+-------------------------- */
 
 export function WorkflowSection() {
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start end", "end start"],
-  });
-
-  // Smooth scroll-based fade + lift for main section
-  const sectionOpacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
-  const sectionY = useTransform(scrollYProgress, [0, 0.3, 1], [50, 0, -50]);
-
-  // Parallax glow
-  const yGlow = useTransform(scrollYProgress, [0, 1], [100, -100]);
-  const opacityGlow = useTransform(scrollYProgress, [0, 0.5], [0.1, 0.3]);
-
-  // Fade-up animation variant
-  const fadeUp = {
-    hidden: { opacity: 0, y: 60 },
-    show: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.8,
-        ease: "easeOut",
-      },
-    },
-  } as const;
-
   return (
-    <motion.section
-      id="workflow"
-      ref={sectionRef}
-      style={{ opacity: sectionOpacity, y: sectionY }}
-      className="relative mx-auto mt-32 w-full max-w-6xl px-6 sm:px-8 lg:px-10"
-    >
-      {/* Floating background glow */}
-      <motion.div
-        style={{ y: yGlow, opacity: opacityGlow }}
-        className="pointer-events-none absolute left-1/2 top-1/2 z-0 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-blue-500/20 blur-[120px]"
-      />
-
-      {/* Header */}
-      <motion.header
-        variants={fadeUp}
-        initial="hidden"
-        whileInView="show"
-        viewport={{ once: true, amount: 0.4 }}
-        className="flex flex-col items-center text-center text-white mb-16"
-      >
-        <motion.span
-          variants={fadeUp}
-          className="inline-flex items-center rounded-full bg-blue-500/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-blue-400"
+    <section className="w-full py-28 md:py-36 bg-[#050913] text-white">
+      <div className="max-w-6xl mx-auto px-6">
+        {/* HEADER */}
+        <h2
+          className="text-center text-5xl md:text-6xl font-bold 
+                       bg-linear-to-r from-sky-400 via-blue-500 to-purple-500 
+                       bg-clip-text text-transparent"
         >
-          • How it works
-        </motion.span>
-        <motion.h2
-          variants={fadeUp}
-          className="mt-5 text-4xl font-bold leading-tight md:text-5xl"
-        >
-          Simple steps to{" "}
-          <span className="bg-linear-to-r from-sky-400 via-blue-500 to-indigo-400 bg-clip-text text-transparent">
-            smarter customer engagement
-          </span>
-        </motion.h2>
+          How Cyra Works
+        </h2>
 
-        <motion.p
-          variants={fadeUp}
-          className="mt-4 max-w-2xl text-lg text-white/70"
-        >
-          Discover how effortlessly you can integrate, customize, and optimize
-          your AI chatbot to transform customer engagement.
-        </motion.p>
-      </motion.header>
+        <p className="text-center text-white/60 max-w-2xl mx-auto mt-6">
+          A clean 4-step workflow showing Cyra’s full AI-powered security
+          process.
+        </p>
 
-      {/* Workflow Steps Grid */}
-      <motion.div
-        variants={fadeUp}
-        initial="hidden"
-        whileInView="show"
-        viewport={{ once: true, amount: 0.3 }}
-        className="grid gap-8 md:grid-cols-2 lg:grid-cols-[1.5fr,1fr]"
-      >
-        {workflowSteps.map((step, index) => (
+        {/* TIMELINE */}
+        <motion.div
+          variants={container}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: "-80px" }}
+          className="relative mt-20"
+        >
+          {/* CENTER LINE */}
           <motion.div
-            key={step.title}
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.3 }}
+            initial={{ scaleY: 0 }}
+            whileInView={{ scaleY: 1 }}
             transition={{
-              delay: index * 0.2,
-              duration: 0.8,
-              ease: "easeOut",
+              duration: 1,
+              ease: [0.25, 0.1, 0.25, 1],
             }}
-            className={cn(
-              "relative overflow-hidden rounded-3xl border border-white/10 bg-linear-to-b from-white/10 via-white/5 to-transparent p-8 backdrop-blur-xl shadow-lg transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_25px_50px_rgba(56,189,248,0.25)] flex flex-col",
-              index === 0 ? "md:row-span-2" : ""
-            )}
-          >
-            {/* Step number + title */}
-            <div className="flex items-center gap-3 mb-4">
-              <motion.span
-                whileHover={{ scale: 1.15 }}
-                transition={{ type: "spring", stiffness: 250, damping: 18 }}
-                className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-500/10 text-blue-400 font-bold text-lg"
-              >
-                {index + 1}
-              </motion.span>
-              <h3 className="text-xl font-semibold text-white">
-                {step.title}
-              </h3>
-            </div>
+            className="absolute left-1/2 top-0 bottom-0 w-[3px] origin-top 
+                       bg-linear-to-b from-sky-400 via-blue-500 to-purple-500 opacity-70 
+                       transform -translate-x-1/2 z-0"
+          />
 
-            {/* Step description */}
-            <p className="text-sm leading-relaxed text-white/70 mb-6">
-              {step.description}
-            </p>
+          {/* STEPS */}
+          <div className="space-y-32">
+            {steps.map((step, i) => {
+              const isLeft = i % 2 === 0;
 
-            {/* Step visual animation area (full image cover) */}
-            <motion.div
-              className={cn(
-                "relative w-full overflow-hidden rounded-2xl bg-blue-900/20 flex-1 min-h-48",
-                index === 0 ? "h-full mt-auto" : "h-48"
-              )}
-              whileHover={{ scale: 1.03 }}
-              transition={{ type: "spring", stiffness: 200, damping: 18 }}
-            >
-              {/* Full background image */}
-              <motion.img
-                src={step.image}
-                alt={step.title}
-                className="absolute inset-0 h-full w-full object-cover object-center transition duration-700 ease-out hover:brightness-110"
-                animate={{ scale: [1, 1.05, 1] }}
-                transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
-              />
+              return (
+                <motion.div
+                  key={i}
+                  variants={makeCardVariant(isLeft)}
+                  className={`relative flex ${
+                    isLeft ? "justify-start" : "justify-end"
+                  }`}
+                >
+                  {/* DOT */}
+                  <motion.div
+                    variants={dotPop}
+                    className="absolute left-1/2 top-1/2 w-6 h-6 rounded-full 
+                               bg-linear-to-br from-sky-400 to-purple-500 
+                               shadow-[0_0_14px_rgba(120,80,255,0.6)]
+                               transform -translate-x-1/2 -translate-y-1/2
+                               z-10"
+                  />
 
-              {/* Dark gradient overlay */}
-              <div className="absolute inset-0 bg-linear-to-b from-transparent via-[#050913]/30 to-[#050913]/70" />
+                  {/* CONNECTOR */}
+                  <motion.div
+                    variants={lineGrow}
+                    className={`
+                      absolute top-1/2 h-[3px] origin-left bg-linear-to-r
+                      from-sky-400 to-purple-500/70
+                      ${isLeft ? "right-[50%]" : "left-[50%]"}
+                      z-0
+                    `}
+                    style={{
+                      width: `calc(50% - 160px)`,
+                    }}
+                  />
 
-              {/* Subtle glowing effect */}
-              <motion.div
-                className="absolute inset-0 bg-blue-500/10 blur-3xl"
-                animate={{ opacity: [0.1, 0.25, 0.1] }}
-                transition={{ repeat: Infinity, duration: 5, ease: "easeInOut" }}
-              />
+                  {/* CARD */}
+                  <motion.div
+                    whileHover={{
+                      y: -6,
+                      scale: 1.03,
+                      boxShadow: "0 0 25px rgba(130,100,255,0.35)",
+                      borderColor: "rgba(255,255,255,0.25)",
+                      backgroundColor: "rgba(255,255,255,0.12)",
+                    }}
+                    transition={{ duration: 0.35, ease: [0.25, 0.1, 0.25, 1] }}
+                    className={`
+                      w-[360px] p-6 rounded-2xl shadow-xl 
+                      bg-white/10 backdrop-blur-xl border border-white/20
+                      flex gap-4 items-start relative
+                      ${isLeft ? "mr-32" : "ml-32"}
+                      z-20
+                    `}
+                  >
+                    {/* NUMBER BADGE */}
+                    <motion.div
+                      variants={numberPop}
+                      className="absolute -top-4 left-0 px-3 py-1 rounded-full 
+                                 bg-linear-to-r from-sky-400 to-purple-500 
+                                 text-xs font-bold shadow-md"
+                    >
+                      {String(i + 1).padStart(2, "0")}
+                    </motion.div>
 
-              {/* Animated rotating highlight line */}
-              {/* <motion.div
-                className="absolute top-1/2 left-1/2 w-[200px] h-[2px] bg-linear-to-r from-transparent via-blue-400/50 to-transparent"
-                animate={{ rotate: [0, 360] }}
-                transition={{ repeat: Infinity, duration: 10, ease: "linear" }}
-              /> */}
-            </motion.div>
-          </motion.div>
-        ))}
-      </motion.div>
-    </motion.section>
+                    {/* ICON WITH HOVER ANIMATION */}
+                    <motion.div
+                      whileHover={{ rotate: 6, scale: 1.1 }}
+                      transition={{
+                        type: "spring",
+                        stiffness: 200,
+                        damping: 12,
+                      }}
+                      className="p-3 rounded-full bg-white/10 border border-white/20"
+                    >
+                      {step.icon}
+                    </motion.div>
+
+                    <div>
+                      <h3 className="text-xl font-semibold">{step.title}</h3>
+                      <p className="text-white/60 text-sm mt-1">{step.desc}</p>
+                    </div>
+                  </motion.div>
+                </motion.div>
+              );
+            })}
+          </div>
+        </motion.div>
+      </div>
+    </section>
   );
 }
