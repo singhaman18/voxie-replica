@@ -1,7 +1,13 @@
 "use client";
 
 import { motion, Variants } from "framer-motion";
-import { CloudCog, Shield, FileSearch, Wrench } from "lucide-react";
+import {
+  CloudCog,
+  Shield,
+  FileSearch,
+  Wrench,
+  AlertTriangle,
+} from "lucide-react";
 
 const steps = [
   {
@@ -20,9 +26,9 @@ const steps = [
     icon: <FileSearch className="h-6 w-6 text-purple-400" />,
   },
   {
-    title: "Fix Issues",
-    desc: "Get guided remediation steps and continuous monitoring.",
-    icon: <Wrench className="h-6 w-6 text-green-400" />,
+    title: "Get Alerts",
+    desc: "Get real-time notifications on security threats and vulnerabilities.",
+    icon: <AlertTriangle className="h-6 w-6 text-green-400" />,
   },
 ];
 

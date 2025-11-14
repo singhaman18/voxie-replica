@@ -15,25 +15,40 @@ export const trustedLogos = [
 
 export const featureCards = [
   {
-    title: "Multilingual Support",
+    title: "5 minute setup",
     description:
-      "Break language barriers with intelligent, real-time translation across 100+ locales.",
-    badge: "Global",
-    image: "/images/support.png",
+      "Connect your GCP projet instantly through guided onboarding with IAM role varification and service account sync.",
+    badge: "Setup",
   },
   {
-    title: "24/7 Availability",
+    title: "Continuous Cloud Monitoring",
     description:
-      "Deliver instant, human-like responses around the clock to meet customers wherever they are.",
-    badge: "Always-on",
-    image: "/images/time.avif",
+      "Cyra continously watches your cloud for misconfiguration, risky IAM permissions, cloud drift, and compliance issues.",
+    badge: "Monitoring",
   },
   {
-    title: "Universal Integration",
+    title: "AI Security Scanning",
     description:
-      "Connect seamlessly with Shopify, HubSpot, Salesforce, WordPress, and every tool in your stack.",
-    badge: "Plug & Play",
-    image: "/images/integration.jpg",
+      "Deep AI - powered scans across workloads, APIs, compute IAM roles, and storage- giving complete cloud visibility. ",
+    badge: "Scanning",
+  },
+  {
+    title: "5 minute setup",
+    description:
+      "Connect your GCP projet instantly through guided onboarding with IAM role varification and service account sync.",
+    badge: "Setup",
+  },
+  {
+    title: "Continuous Cloud Monitoring",
+    description:
+      "Cyra continously watches your cloud for misconfiguration, risky IAM permissions, cloud drift, and compliance issues.",
+    badge: "Monitoring",
+  },
+  {
+    title: "AI Security Scanning",
+    description:
+      "Deep AI - powered scans across workloads, APIs, compute IAM roles, and storage- giving complete cloud visibility. ",
+    badge: "Scanning",
   },
 ];
 
@@ -60,22 +75,22 @@ export const workflowSteps = [
 
 export const benefitCards = [
   {
-    eyebrow: "Support",
-    title: "Elevate customer support",
+    eyebrow: "Security",
+    title: "Real-time threat detection",
     description:
-      "Resolve questions in seconds with AI co-pilots that deflect repetitive tickets and free your experts for complex cases.",
+      "Get instant alerts when CYRA identifies misconfigurations, suspicious IAM activities, or potential security threats across your GCP infrastructure.",
   },
   {
-    eyebrow: "Growth",
-    title: "Break language barriers",
+    eyebrow: "Compliance",
+    title: "Stay audit-ready",
     description:
-      "Expand globally with live translation, localized intents, and cultural nuance baked into every answer.",
+      "Continuously monitor your cloud environment against security best practices and compliance standards, with automated reporting for your team.",
   },
   {
-    eyebrow: "Operations",
-    title: "Adapt to every workflow",
+    eyebrow: "Insights",
+    title: "AI-powered recommendations",
     description:
-      "Whether you're support-first, sales-led, or product-driven, Cyra bends to your pipelines without brittle scripts.",
+      "Receive intelligent, actionable security recommendations tailored to your GCP projects, helping you fix vulnerabilities before they become incidents.",
   },
 ];
 

@@ -116,18 +116,6 @@ export function FeaturesSection() {
             transition={{ type: "spring", stiffness: 200, damping: 15 }}
             className="group relative overflow-hidden rounded-3xl border border-white/10 bg-linear-to-br from-white/10 via-white/5 to-white/0 p-8 shadow-xl shadow-black/20 backdrop-blur-lg transition-all duration-500"
           >
-            {/* 🖼 Background Image for first two cards */}
-            {card.image && (
-              <div className="absolute inset-0 -z-10">
-                <Image
-                  src={card.image}
-                  alt={card.title}
-                  fill
-                  className="object-cover opacity-40 group-hover:opacity-60 transition duration-700"
-                />
-              </div>
-            )}
-
             {/* Card Content */}
             <span className="inline-flex items-center rounded-full border border-sky-400/40 bg-sky-500/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-sky-400">
               {card.badge}

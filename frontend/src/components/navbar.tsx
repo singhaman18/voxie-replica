@@ -20,7 +20,11 @@ export function Navbar() {
   const { scrollYProgress } = useScroll();
 
   // Smooth background transitions on scroll
-  const backgroundOpacity = useTransform(scrollYProgress, [0, 0.15], [0.6, 0.9]);
+  const backgroundOpacity = useTransform(
+    scrollYProgress,
+    [0, 0.15],
+    [0.6, 0.9]
+  );
   const shadowOpacity = useTransform(scrollYProgress, [0, 0.15], [0.1, 0.3]);
   const progressScale = useTransform(scrollYProgress, [0, 1], [0, 1]);
 
@@ -73,9 +77,8 @@ export function Navbar() {
               <motion.span
                 className="text-lg font-semibold text-primary"
                 animate={{ rotate: [0, 12, -10, 0] }}
-                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
               >
-                VX
+                CY
               </motion.span>
             </motion.div>
             <div className="flex flex-col">
@@ -83,7 +86,7 @@ export function Navbar() {
                 Cyra
               </span>
               <span className="text-[11px] uppercase tracking-[0.35em] text-white/40">
-                AI PLATFORM
+                AI SECURITY
               </span>
             </div>
           </Link>
@@ -129,13 +132,11 @@ export function Navbar() {
                     </motion.span>
 
                     {/* Hover Glow */}
-                    <motion.div
-                      className="absolute inset-0 -z-10 rounded-md bg-linear-to-r from-sky-500/10 via-sky-400/15 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300"
-                    />
+                    <motion.div className="absolute inset-0 -z-10 rounded-md bg-linear-to-r from-sky-500/10 via-sky-400/15 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300" />
 
                     {/* Underline */}
                     <motion.span
-                      className="absolute -bottom-1 left-0 h-[2px] w-full origin-left bg-linear-to-r from-transparent via-sky-400 to-transparent"
+                      className="absolute -bottom-1 left-0 h-0.5 w-full origin-left bg-linear-to-r from-transparent via-sky-400 to-transparent"
                       initial={{ scaleX: 0 }}
                       animate={{ scaleX: isActive ? 1 : 0 }}
                       whileHover={{ scaleX: 1 }}
