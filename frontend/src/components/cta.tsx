@@ -78,7 +78,7 @@ export function CallToAction() {
             }}
             transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
           >
-            VX
+            CY
           </motion.span>
           Cyra
         </motion.div>
@@ -107,7 +107,7 @@ export function CallToAction() {
             size="lg"
             className="h-12 rounded-full bg-linear-to-r from-blue-500 to-indigo-600 px-8 text-base font-semibold text-white shadow-[0_0_20px_rgba(37,99,235,0.4)] transition hover:shadow-[0_0_30px_rgba(37,99,235,0.6)]"
           >
-            <Link href="#pricing">Get Started →</Link>
+            <Link href="/signup">Get Started →</Link>
           </Button>
         </motion.div>
       </motion.div>

@@ -159,7 +159,7 @@ export function Navbar() {
                 asChild
                 className="rounded-full bg-linear-to-r from-primary to-sky-400 px-6 py-2 text-sm font-semibold text-slate-900 shadow-[0_18px_40px_rgba(56,189,248,0.25)] transition-all hover:shadow-[0_22px_45px_rgba(56,189,248,0.35)]"
               >
-                <Link href="#pricing" onClick={handleNavigate}>
+                <Link href="/signup" onClick={handleNavigate}>
                   Get Started →
                 </Link>
               </Button>
@@ -254,7 +254,7 @@ export function Navbar() {
                   size="lg"
                   className="w-full rounded-full bg-linear-to-r from-primary to-sky-400 text-base font-semibold text-slate-900 shadow-[0_18px_40px_rgba(56,189,248,0.25)] hover:shadow-[0_22px_45px_rgba(56,189,248,0.35)]"
                 >
-                  <Link href="#pricing" onClick={handleNavigate}>
+                  <Link href="/signup" onClick={handleNavigate}>
                     Get Started
                   </Link>
                 </Button>

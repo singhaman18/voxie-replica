@@ -151,7 +151,7 @@ export function Footer() {
               Cookies
             </Link>
             <Link
-              href="/#pricing"
+              href="/signup"
               className="ml-4 text-blue-400 hover:text-white font-semibold transition"
             >
               Get Started →
