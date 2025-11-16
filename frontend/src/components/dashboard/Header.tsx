@@ -1,49 +1,52 @@
-import { Search, Bell, ChevronDown } from "lucide-react";
-import * as React from "react";
-import { Badge } from "../ui/badge";
-import { dashboardConfig } from "@/data/content";
+"use client";
+
+import { BellIcon } from "@heroicons/react/24/outline";
 
 export function Header() {
   return (
-    <header className="h-16 border-b border-border bg-card px-6 flex items-center justify-between">
+    <header
+      className="
+        w-full h-16 
+        bg-[#111827]
+        border-b border-white/10
+        shadow-[0_2px_25px_rgba(99,102,241,0.15)]
+        flex items-center justify-between
+        px-8
+      "
+    >
       {/* Search */}
-      <div className="flex-1 max-w-xl">
-        <div className="relative">
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-muted-foreground" />
-          <input
-            type="text"
-            placeholder="Search threats, alerts, or ask CYRA..."
-            className="w-full pl-10 pr-4 py-2 bg-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-          />
-        </div>
-      </div>
+      <input
+        placeholder="Search threats, alerts, or ask CYRA..."
+        className="
+          w-96 px-4 py-2 rounded-xl
+          bg-white/5 border border-white/10
+          text-white placeholder-white/40
+          focus:ring-2 ring-purple-500/40
+          outline-none
+        "
+      />
 
-      {/* Right Section */}
-      <div className="flex items-center gap-4 ml-6">
-        {/* Notifications */}
-        <button className="relative p-2 hover:bg-accent rounded-lg transition-colors">
-          <Bell className="w-5 h-5" />
-          <span
-            className="absolute top-1 right-1 w-2 h-2 rounded-full bg-primary"
-          ></span>
+      <div className="flex items-center gap-6">
+        <button className="relative">
+          <BellIcon className="w-6 h-6 text-white/70 hover:text-white transition cursor-pointer" />
         </button>
 
-        {/* Status Badge */}
-        <Badge
-          className="border border-primary/50 bg-primary/10 text-primary"
+        {/* System Secure */}
+        <div
+          className="
+            px-4 py-2 rounded-xl 
+            bg-linear-to-r from-blue-500 to-purple-500 
+            text-white text-sm font-medium
+            shadow-[0_0_15px_rgba(99,102,241,0.4)]
+          "
         >
           System Secure
-        </Badge>
+        </div>
 
-        {/* User Menu */}
-        <button className="flex items-center gap-2 hover:bg-accent rounded-lg px-3 py-2 transition-colors">
-          <div
-            className="w-8 h-8 rounded-full flex items-center justify-center bg-primary text-primary-foreground"
-          >
-            <span style={{ fontSize: "0.75rem" }}>{dashboardConfig.userInitials}</span>
-          </div>
-          <ChevronDown className="w-4 h-4" />
-        </button>
+        {/* User */}
+        <div className="w-10 h-10 rounded-full bg-blue-500/20 border border-blue-400/50 flex items-center justify-center text-blue-300 font-semibold cursor-pointer">
+          AD
+        </div>
       </div>
     </header>
   );

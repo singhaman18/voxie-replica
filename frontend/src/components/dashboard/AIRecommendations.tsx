@@ -1,119 +1,83 @@
-import { Card } from "../ui/card";
-import { Brain, Sparkles, CheckCircle2, ArrowRight } from "lucide-react";
-import { dashboardRecommendations } from "@/data/content";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+"use client";
 
 export function AIRecommendations() {
-  const getImpactColor = (impact: string) => {
-    switch (impact) {
-      case "critical":
-        return "#ef4444";
-      case "high":
-        return "#f59e0b";
-      case "medium":
-        return "#eab308";
-      default:
-        return "#64748b";
-    }
+  const cardClass = `
+    bg-[#0F1624]
+    border border-white/10
+    rounded-2xl
+    shadow-[0_0_20px_rgba(99,102,241,0.12)]
+    p-6
+    text-white
+    transition
+    hover:shadow-[0_0_35px_rgba(99,102,241,0.25)]
+    hover:-translate-y-1
+  `;
+
+  const recommendationCard = `
+    p-4
+    rounded-xl
+    bg-white/5
+    border border-white/10
+    transition
+    hover:bg-white/10
+  `;
+
+  const recommendations = [
+    {
+      title: "Implement Service Account Key Rotation",
+      level: "high",
+      desc: "CYRA detected stale service account keys older than 90 days. Rotate keys to reduce security risk.",
+    },
+    {
+      title: "Enable Cloud Audit Logging",
+      level: "critical",
+      desc: "Admin audit logs are disabled in 2 GCP projects. Enable logs to monitor privileged activity.",
+    },
+    {
+      title: "Restrict IAM Role Bindings",
+      level: "medium",
+      desc: "Too many users have access to Owner/Editor roles. Apply least-privilege permissions.",
+    },
+  ];
+
+  const levelColors: any = {
+    critical: "bg-red-500/20 text-red-300 border-red-500/30",
+    high: "bg-amber-400/20 text-amber-300 border-amber-400/30",
+    medium: "bg-blue-500/20 text-blue-300 border-blue-500/30",
   };
 
   return (
-    <Card className="p-6 border-border">
-      <div className="flex items-center gap-3 mb-6">
-        <div className="relative">
-          <Brain className="w-5 h-5 text-primary" />
-          <Sparkles className="w-3 h-3 absolute -top-1 -right-1 text-primary" />
-        </div>
-        <div>
-          <h2>AI-Powered Recommendations</h2>
-          <p className="text-muted-foreground" style={{ fontSize: "0.875rem" }}>
-            CYRA analyzed your GCP security posture and suggests these actions
-          </p>
-        </div>
-      </div>
+    <div className={cardClass}>
+      <h3 className="text-xl font-semibold text-white mb-4">
+        AI-Powered Recommendations
+      </h3>
+
+      <p className="text-white/70 text-sm mb-6">
+        CYRA analyzed your GCP security posture and suggests these improvements:
+      </p>
 
       <div className="space-y-4">
-        {dashboardRecommendations.map((rec) => (
-          <div
-            key={rec.id}
-            className="p-4 rounded-lg border border-border hover:border-primary/50 transition-all group"
-            style={{
-              backgroundColor: "hsl(var(--primary) / 0.03)",
-              borderLeftWidth: "3px",
-              borderLeftColor: getImpactColor(rec.impact),
-            }}
-          >
-            <div className="flex items-start justify-between gap-4 mb-3">
-              <div className="flex-1">
-                <div className="flex items-center gap-2 mb-2">
-                  <p className="text-foreground">{rec.title}</p>
-                  <div
-                    className="px-2 py-1 rounded text-xs"
-                    style={{
-                      backgroundColor: `${getImpactColor(rec.impact)}20`,
-                      color: getImpactColor(rec.impact),
-                    }}
-                  >
-                    {rec.impact}
-                  </div>
-                </div>
-                <p
-                  className="text-muted-foreground"
-                  style={{ fontSize: "0.875rem" }}
-                >
-                  {rec.description}
-                </p>
-              </div>
+        {recommendations.map((rec, i) => (
+          <div key={i} className={recommendationCard}>
+            <div className="flex justify-between items-start">
+              <h4 className="text-white font-semibold">{rec.title}</h4>
+
+              <span
+                className={`px-3 py-1 text-xs font-semibold rounded-full border ${levelColors[rec.level]}`}
+              >
+                {rec.level}
+              </span>
             </div>
 
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <div
-                  className="flex items-center gap-1"
-                  style={{ fontSize: "0.75rem" }}
-                >
-                  <CheckCircle2 className="w-3 h-3 text-primary" />
-                  <span className="text-muted-foreground">
-                    {rec.confidence}% confidence
-                  </span>
-                </div>
-              </div>
+            <p className="text-white/60 mt-2 text-sm">{rec.desc}</p>
 
-              {rec.actionable && (
-                <button
-                  className="flex items-center gap-2 px-3 py-1.5 rounded-lg transition-all group-hover:translate-x-1 bg-primary/10 text-primary hover:bg-primary/20"
-                  style={{
-                    fontSize: "0.875rem",
-                  }}
-                >
-                  <span>Take Action</span>
-                  <ArrowRight className="w-4 h-4" />
-                </button>
-              )}
-            </div>
+            <button className="mt-3 inline-flex items-center px-4 py-2 text-sm font-medium rounded-lg bg-blue-500 hover:bg-blue-600 text-white transition cursor-pointer">
+              Take Action →
+            </button>
           </div>
         ))}
       </div>
-
-      {/* AI Status Footer */}
-      <div className="mt-6 pt-6 border-t border-border">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="w-2 h-2 rounded-full animate-pulse bg-primary"></div>
-            <p
-              className="text-muted-foreground"
-              style={{ fontSize: "0.875rem" }}
-            >
-              CYRA is actively monitoring your GCP environment
-            </p>
-          </div>
-          <button
-            className="text-muted-foreground hover:text-foreground transition-colors"
-            style={{ fontSize: "0.875rem" }}
-          >
-            Learn More
-          </button>
-        </div>
-      </div>
-    </Card>
+    </div>
   );
 }

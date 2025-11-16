@@ -1,129 +1,101 @@
-import { AlertTriangle, Clock } from "lucide-react";
-import { Card } from "../ui/card";
-import { Badge } from "../ui/badge";
-import { dashboardAlerts } from "@/data/content";
+"use client";
 
 export function AlertsList() {
-  const getSeverityColor = (severity: string) => {
-    switch (severity) {
-      case "critical":
-        return "#ef4444";
-      case "high":
-        return "#f59e0b";
-      case "medium":
-        return "#eab308";
-      case "low":
-        return "#14b8a6";
-      default:
-        return "#64748b";
-    }
-  };
+  const cardClass = `
+    bg-[#0F1624]
+    border border-white/10
+    rounded-2xl
+    shadow-[0_0_20px_rgba(99,102,241,0.12)]
+    p-6
+    text-white
+    transition
+    hover:shadow-[0_0_35px_rgba(99,102,241,0.25)]
+    hover:-translate-y-1
+  `;
 
-  const getStatusBadge = (status: string) => {
-    const styles: Record<
-      string,
-      { bg: string; color: string; border: string }
-    > = {
-      active: {
-        bg: "rgba(239, 68, 68, 0.1)",
-        color: "#ef4444",
-        border: "#ef4444",
-      },
-      investigating: {
-        bg: "rgba(234, 179, 8, 0.1)",
-        color: "#eab308",
-        border: "#eab308",
-      },
-      pending: {
-        bg: "rgba(59, 130, 246, 0.1)",
-        color: "#3b82f6",
-        border: "#3b82f6",
-      },
-      resolved: {
-        bg: "rgba(20, 184, 166, 0.1)",
-        color: "#14b8a6",
-        border: "#14b8a6",
-      },
-    };
+  const alertItemClass = `
+    p-4 mb-3
+    bg-white/5
+    border border-white/10
+    rounded-xl
+    hover:bg-white/10
+    transition
+    flex flex-col
+    relative
+  `;
 
-    return styles[status] || styles.pending;
+  const alerts = [
+    {
+      title: "Unusual IAM Permission Change",
+      desc: "Service account granted excessive permissions.",
+      time: "5 min ago",
+      status: "active",
+    },
+    {
+      title: "Public Storage Bucket Detected",
+      desc: "A GCS bucket is publicly accessible.",
+      time: "12 min ago",
+      status: "pending",
+    },
+    {
+      title: "Firewall Rule Modified",
+      desc: "SSH access opened to all IPs.",
+      time: "25 min ago",
+      status: "critical",
+    },
+    {
+      title: "API Key Leak Suspected",
+      desc: "Unusual outgoing API calls detected.",
+      time: "1 hour ago",
+      status: "resolved",
+    },
+    {
+      title: "Failed Admin Login Attempts",
+      desc: "Multiple failed login attempts from unknown device.",
+      time: "2 hours ago",
+      status: "active",
+    },
+  ];
+
+  const statusColors = {
+    pending: "bg-amber-500/20 text-amber-300 border-amber-400/30",
+    active: "bg-blue-500/20 text-blue-300 border-blue-400/30",
+    resolved: "bg-emerald-500/20 text-emerald-300 border-emerald-400/30",
+    critical: "bg-red-500/20 text-red-300 border-red-400/30",
   };
 
   return (
-    <Card className="p-6 border-border">
-      <div className="flex items-center justify-between mb-6">
-        <div className="flex items-center gap-3">
-          <AlertTriangle className="w-5 h-5 text-primary" />
-          <h2>Recent Alerts</h2>
-        </div>
-        <button
-          className="text-muted-foreground hover:text-foreground transition-colors"
-          style={{ fontSize: "0.875rem" }}
-        >
-          View All
-        </button>
+    <div className={cardClass}>
+      <div className="flex justify-between mb-4">
+        <h3 className="text-lg font-semibold text-white">Recent Alerts</h3>
+        <button className="text-sm text-blue-400 hover:underline cursor-pointer">View All</button>
       </div>
 
-      <div className="space-y-3">
-        {dashboardAlerts.map((alert) => {
-          const statusStyle = getStatusBadge(alert.status);
-
-          return (
-            <div
-              key={alert.id}
-              className="p-4 rounded-lg border border-border hover:border-opacity-100 transition-all cursor-pointer group"
-              style={{ backgroundColor: "rgba(255, 255, 255, 0.02)" }}
-            >
-              <div className="flex items-start gap-4">
-                {/* Severity Indicator */}
-                <div className="mt-1">
-                  <div
-                    className="w-2 h-2 rounded-full"
-                    style={{
-                      backgroundColor: getSeverityColor(alert.severity),
-                    }}
-                  ></div>
-                </div>
-
-                {/* Content */}
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-start justify-between gap-2 mb-2">
-                    <p className="text-foreground group-hover:text-opacity-90">
-                      {alert.title}
-                    </p>
-                    <Badge
-                      className="border shrink-0"
-                      style={{
-                        backgroundColor: statusStyle.bg,
-                        color: statusStyle.color,
-                        borderColor: statusStyle.border,
-                        fontSize: "0.75rem",
-                      }}
-                    >
-                      {alert.status}
-                    </Badge>
-                  </div>
-
-                  <p
-                    className="text-muted-foreground mb-2"
-                    style={{ fontSize: "0.875rem" }}
-                  >
-                    {alert.description}
-                  </p>
-
-                  <div
-                    className="flex items-center gap-2 text-muted-foreground"
-                    style={{ fontSize: "0.75rem" }}
-                  >
-                    <Clock className="w-3 h-3" />
-                    <span>{alert.time}</span>
-                  </div>
-                </div>
-              </div>
+      <div className="space-y-4">
+        {alerts.map((a, i) => (
+          <div key={i} className={alertItemClass}>
+            <div className="flex justify-between">
+              <p className="font-semibold text-white">{a.title}</p>
             </div>
-          );
-        })}
+            <p className="text-sm text-white/60 mt-1">{a.desc}</p>
+
+            <div className="flex items-center gap-3 mt-3">
+              <p className="text-xs text-white/40">{a.time}</p>
+            </div>
+
+            {/* STATUS BADGE BOTTOM RIGHT */}
+            <span
+              className={`
+                absolute bottom-3 right-3 
+                px-3 py-1 text-xs font-semibold rounded-full border 
+                ${statusColors[a.status as keyof typeof statusColors]}
+              `}
+            >
+              {a.status}
+            </span>
+          </div>
+        ))}
       </div>
-    </Card>
+    </div>
   );
 }
