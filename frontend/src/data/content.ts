@@ -203,3 +203,137 @@ export const faqs = [
       "No caps on concurrency. Plans scale based on total conversations per month, and enterprise tiers can remove limits entirely.",
   },
 ];
+
+// Dashboard Content
+export const dashboardConfig = {
+  title: "CYRA Security Dashboard",
+  subtitle: "Monitor your GCP infrastructure security in real-time",
+  userEmail: "admin@cyra.ai",
+  userName: "Admin User",
+  userInitials: "AD",
+};
+
+export const dashboardNavItems = [
+  { label: "Dashboard", active: true },
+  { label: "Live Monitoring", active: false },
+  { label: "Threats", active: false },
+  { label: "Investigations", active: false },
+  { label: "AI Assistant", active: false },
+  { label: "Security Policies", active: false },
+  { label: "Settings", active: false },
+];
+
+export const dashboardMetrics = [
+  {
+    title: "Threats Blocked",
+    value: "1,247",
+    change: "+12.5%",
+    trend: "up" as const,
+    type: "threats",
+  },
+  {
+    title: "Active Incidents",
+    value: "3",
+    change: "-67%",
+    trend: "down" as const,
+    type: "incidents",
+  },
+  {
+    title: "Security Score",
+    value: "94/100",
+    change: "+5 pts",
+    trend: "up" as const,
+    type: "score",
+  },
+  {
+    title: "Vulnerabilities",
+    value: "12",
+    change: "-8",
+    trend: "down" as const,
+    type: "vulnerabilities",
+  },
+];
+
+export const dashboardAlerts = [
+  {
+    id: 1,
+    title: "Unusual IAM Permission Change",
+    description:
+      "Service account granted excessive permissions in production project",
+    severity: "high" as const,
+    time: "5 min ago",
+    status: "active" as const,
+  },
+  {
+    id: 2,
+    title: "Public Storage Bucket Detected",
+    description: "GCS bucket 'prod-data-backup' is publicly accessible",
+    severity: "critical" as const,
+    time: "12 min ago",
+    status: "active" as const,
+  },
+  {
+    id: 3,
+    title: "Firewall Rule Misconfiguration",
+    description: "VPC firewall allows unrestricted SSH access from 0.0.0.0/0",
+    severity: "medium" as const,
+    time: "28 min ago",
+    status: "investigating" as const,
+  },
+  {
+    id: 4,
+    title: "VM Instance Security Update",
+    description: "3 Compute Engine instances require critical security patches",
+    severity: "medium" as const,
+    time: "1 hour ago",
+    status: "pending" as const,
+  },
+  {
+    id: 5,
+    title: "Unauthorized API Access Blocked",
+    description: "Blocked suspicious API calls to Cloud Storage from unknown IP",
+    severity: "low" as const,
+    time: "2 hours ago",
+    status: "resolved" as const,
+  },
+];
+
+export const dashboardRecommendations = [
+  {
+    id: 1,
+    title: "Implement Service Account Key Rotation",
+    description:
+      "CYRA detected 12 service account keys older than 90 days. Automate key rotation to reduce security risks.",
+    confidence: 95,
+    impact: "high" as const,
+    actionable: true,
+  },
+  {
+    id: 2,
+    title: "Enable Cloud Audit Logging",
+    description:
+      "Admin activity logs are disabled in 2 GCP projects. Enable comprehensive audit logging for compliance.",
+    confidence: 98,
+    impact: "critical" as const,
+    actionable: true,
+  },
+  {
+    id: 3,
+    title: "Review VPC Network Configuration",
+    description:
+      "Multiple VPC networks lack flow logs. Enable VPC Flow Logs for better network visibility and threat detection.",
+    confidence: 92,
+    impact: "high" as const,
+    actionable: true,
+  },
+  {
+    id: 4,
+    title: "Optimize IAM Permissions",
+    description:
+      "CYRA identified 8 users with Owner role. Implement least-privilege access using custom roles.",
+    confidence: 88,
+    impact: "medium" as const,
+    actionable: true,
+  },
+];
+
